@@ -1,0 +1,50 @@
+#watch {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-image: url(../images/backgroundWatch.png);
+    background-size: cover;
+    color: white;
+    z-index: 1;
+}
+
+#time {
+    font-size: 30px;
+    margin-left: 23%;
+    margin-top: 8%;
+    height: 38px;
+}
+
+#controls {
+    margin-left: 15px;
+}
+
+.control {
+    margin-left: 3px;
+    margin-bottom: 5px;
+}
+
+#videoDuration {
+    background-color: white;
+    width: 160px;
+    height: 6px;
+    margin-left: 21px;
+    margin-bottom: 4px;
+}
+
+#videoCurrentTime{
+    background-color: red;
+    width: 0px;
+    height: 6px;
+}
+
+#volume {
+    margin-left: 25%;
+}
+
+#volumeValue {
+    text-align: right;
+    font-size: 26px;
+    line-height: 15px;
+    margin-right: 75px;
+}

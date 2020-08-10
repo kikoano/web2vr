@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Video platform</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script
+        src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <script src="/dist/web2vr.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/search.css">
+    <link rel="stylesheet" href="./css/watch.css">
+    <link rel="stylesheet" href="./css/recommended.css">
+    <link rel="stylesheet" href="./css/description.css">
+    <link rel="stylesheet" href="./css/modal.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.0"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="searchbar" class="container-fluid">
+        <div class="row">
+            <div class="col text-center">
+                <img id="logo" src="images/videoLogo.png">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="input-group">
+                    <input id="searchInput" class="form-control" type="text">
+                    <button id="searchBtn" class="btn btn-dark">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="searchResult" class="container-fluid">
+        <div id="cards" class="row row-cols-3">
+        </div>
+    </div>
+
+    <div id="recommended" class="container-fluid">
+        <div class="row">
+            <div class="col-8">
+                <h3>Up Next</h3>
+            </div>
+            <div class="col-4">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="autoplay" value="autoplay">
+                    <label class="form-check-label" for="autoplay">
+                        <h3>Autoplay</h3>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div id="recommendedVideos" class="row row-cols-1">
+        </div>
+    </div>
+
+    <div id="description" class="container-fluid">
+        <div class="row">
+            <div id="title" class="col"></div>
+        </div>
+        <div class="row">
+            <div id="views" class="col"></div>
+        </div>
+        <div class="row">
+            <div id="likes" class="col-auto">
+                <img id="like" class="like-dislike" src="./images/like light.png">
+                <span></span>
+            </div>
+            <div id="dislikes" class="col-auto">
+                <img id="dislike" class="like-dislike" src="./images/dislike light.png">
+                <span></span>
+            </div>
+        </div>
+        <div id="channel-container" class="row">
+            <div class="col-8">
+                <div class="row">
+                    <div class="col">
+                        <img id="avatar">
+                        <div id="channel-info">
+                            <div id="channel">
+                            </div>
+                            <br>
+                            <div id="subscribers">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 align-self-center">
+                <button id="subscribeBtn" class="btn btn-lg btn-danger">Subscribe</button>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div id="upload-date" class="col"></div>
+        </div>
+        <div class="row">
+            <div id="details" class="col"></div>
+        </div>
+    </div>
+
+    <video id="video" control>
+        <source src="/tests/assets/timeScapes.mp4" type="video/mp4">
+    </video>
+
+    <div id="watch">
+        <div id="time"></div>
+        <div id="controls">
+            <img id="playPause" class="control" width="50" height="50" src="images/play.png">
+            <img id="next" class="control" width="50" height="50" src="images/next.png">
+            <img id="daynight" class="control" width="50" height="50" src="images/daynight.png">
+        </div>
+        <div id="videoDuration">
+            <div id="videoCurrentTime"></div>
+        </div>
+        <div id="volume">
+            <img id="volumeDown" class="control" width="40" height="40" src="images/minus.png">
+            <img id="volumeUp" class="control" width="40" height="40" src="images/plus.png">
+        </div>
+        <div id="volumeValue">
+        </div>
+    </div>
+
+    <div id="modal">
+        <p>You have subscribed!</p>
+    </div>
+
+    <a-scene shadow=" type: pcfsoft">
+        <a-assets>
+            <a-asset-item id="watchModel" src="assets/watch.glb"></a-asset-item>
+        </a-assets>
+        <a-entity class="light360" light="" position="0 2 0" visible=false></a-entity>
+        <a-entity class="light360" light="intensity: 0.3; type: ambient" visible=false></a-entity>
+        <a-entity id="environment"
+            environment="dressing: cubes; dressingScale: 6; dressingAmount:20; dressingVariance: '0 40 0'; dressingColor: #484848; seed: 5; ground: canyon; groundColor: #a87d6f; groundColor2: #795449; groundTexture: walkernoise; groundYScale: 20; lightPosition: 5 10 0.33; shadow: true; shadowSize: 1;">
+        </a-entity>
+        <a-entity id="watchEntity" position="0.015 0.03 0.148" scale="0.2 0.2 0.2" rotation="255 -20.71 32"
+            gltf-model="#watchModel" shadow></a-entity>
+    </a-scene>
+
+    <script>
+        const searchbarVR = new Web2VR("#searchbar", { position: { x: -0.832, y: 2.38, z: -1.6 } });
+        searchbarVR.start();
+
+        const searchResultVR = new Web2VR("#searchResult", { position: { y: 2.15, z: -1.6 } });
+        searchResultVR.start();
+
+        const recommendedVR = new Web2VR("#recommended", { position: { x: 1, y: 2.15, z: -1.6 }, rotation: { y: -30 } });
+        recommendedVR.start();
+
+        const descriptionVR = new Web2VR("#description", { position: { x: -1.545, y: 2.15, z: -1.224 }, rotation: { y: 30 } });
+        descriptionVR.start();
+
+        const videoVR = new Web2VR("#video", { position: { x: -1.6, y: 2.6, z: -2.5 } });
+        videoVR.start();
+
+        const modalVR = new Web2VR("#modal", { position: { x: 0, y: 1.7, z: -1.5 } });
+        modalVR.start();
+
+        // append watch on left hand
+        document.getElementById("leftHand").appendChild(document.getElementById("watchEntity"));
+        // add shadow cast to hands
+        document.getElementById("leftHand").setAttribute("shadow", "receive: false;");
+        document.getElementById("rightHand").setAttribute("shadow", "receive: false;");
+
+        const watchVR = new Web2VR("#watch", { scale: 1000, parentSelector: "#watchEntity", position: { x: -0.19, y: 0.054, z: -0.16 }, rotation: { x: -8.5, y: 253, z: 90 } });
+        watchVR.start();
+    </script>
+    <script src="./js/watch.js"></script>
+    <script src="./js/video.js"></script>
+</body>
+
+</html>

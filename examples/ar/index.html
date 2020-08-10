@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>AR</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="/dist/web2vr.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <style>
+        #html-container {
+            position: absolute;
+            width: 750px;
+
+            background-color: #272A3A;
+            color: #d8dadb;
+            z-index: -100;
+        }
+
+        .tile {
+            width: 100%;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 2px 3px -1px rgba(151, 171, 187, 0.7);
+
+            transform-style: preserve-3d;
+            margin: 10px 5px;
+        }
+
+        .header {
+            border-bottom: 1px solid #ebeff2;
+            padding: 19px 0;
+            text-align: center;
+            color: #59687f;
+            font-size: 600;
+            font-size: 19px;
+            position: relative;
+        }
+
+        .banner-img {
+            padding: 5px 5px 0;
+        }
+
+        .banner-img img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .dates {
+            border: 1px solid #ebeff2;
+            border-radius: 5px;
+            padding: 20px 0px;
+            margin: 10px 20px;
+            font-size: 16px;
+            color: #5aadef;
+            font-weight: 600;
+            overflow: auto;
+        }
+
+        .dates div {
+            float: left;
+            width: 50%;
+            text-align: center;
+            position: relative;
+        }
+
+        .dates strong,
+        .stats strong {
+            display: block;
+            color: #adb8c2;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .dates span {
+            width: 1px;
+            height: 40px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            background: #ebeff2;
+        }
+
+        .stats {
+            border-top: 1px solid #ebeff2;
+            background: #f7f8fa;
+            overflow: auto;
+            padding: 15px 0;
+            font-size: 16px;
+            color: #59687f;
+            font-weight: 600;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .stats div {
+            border-right: 1px solid #ebeff2;
+            width: 33.33333%;
+            float: left;
+            text-align: center
+        }
+
+        .stats div:nth-of-type(3) {
+            border: none;
+        }
+
+        div.footer {
+            text-align: right;
+            position: relative;
+            margin: 10px 5px 10px 5px;
+        }
+
+        div.footer button.Cbtn {
+            padding: 10px 20px;
+            background-color: #DADADA;
+            color: #666;
+            margin-left: 2px;
+            margin-bottom: 8px;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+
+        div.footer button.Cbtn-primary {
+            background-color: #5AADF2;
+            color: #FFF;
+        }
+
+        .Cbtn-primary:hover {
+            background-color: #7dbef5 !important;
+        }
+
+        div.footer button.Cbtn-danger {
+            background-color: #fc5a5a;
+            color: #FFF;
+        }
+
+        .Cbtn-danger:hover {
+            background-color: #fd7676 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="html-container">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <div class="tile">
+                        <div class="wrapper">
+                            <div class="header">Event Title</div>
+
+                            <div class="banner-img">
+                                <img src="https://picsum.photos/seed/picsum/600" alt="Image 1">
+                            </div>
+
+                            <div class="stats">
+
+                                <div>
+                                    <strong>INVITED</strong> 3098
+                                </div>
+
+                                <div>
+                                    <strong>JOINED</strong> 562
+                                </div>
+
+                                <div>
+                                    <strong>DECLINED</strong> 182
+                                </div>
+
+                            </div>
+
+                            <div class="stats">
+
+                                <div>
+                                    <strong>INVITED</strong> 3098
+                                </div>
+
+                                <div>
+                                    <strong>JOINED</strong> 562
+                                </div>
+
+                                <div>
+                                    <strong>DECLINED</strong> 182
+                                </div>
+
+                            </div>
+
+                            <div class="stats">
+
+                                <div>
+                                    <strong>INVITED</strong> 3098
+                                </div>
+
+                                <div>
+                                    <strong>JOINED</strong> 562
+                                </div>
+
+                                <div>
+                                    <strong>DECLINED</strong> 182
+                                </div>
+
+                            </div>
+
+                            <div class="footer">
+                                <button href="#" class="Cbtn Cbtn-primary">VIEW</button>
+                                <button href="#" class="Cbtn Cbtn-danger">DELETE</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="tile">
+                        <div class="wrapper">
+                            <div class="header">Event Title</div>
+
+                            <div class="banner-img">
+                                <img src="https://picsum.photos/seed/picsum/600" alt="Image 1">
+                            </div>
+
+                            <div class="stats">
+
+                                <div>
+                                    <strong>INVITED</strong> 3098
+                                </div>
+
+                                <div>
+                                    <strong>JOINED</strong> 562
+                                </div>
+
+                                <div>
+                                    <strong>DECLINED</strong> 182
+                                </div>
+
+                            </div>
+
+                            <div class="stats">
+
+                                <div>
+                                    <strong>INVITED</strong> 3098
+                                </div>
+
+                                <div>
+                                    <strong>JOINED</strong> 562
+                                </div>
+
+                                <div>
+                                    <strong>DECLINED</strong> 182
+                                </div>
+
+                            </div>
+
+                            <div class="stats">
+
+                                <div>
+                                    <strong>INVITED</strong> 3098
+                                </div>
+
+                                <div>
+                                    <strong>JOINED</strong> 562
+                                </div>
+
+                                <div>
+                                    <strong>DECLINED</strong> 182
+                                </div>
+
+                            </div>
+
+                            <div class="footer">
+                                <button href="#" class="Cbtn Cbtn-primary">VIEW</button>
+                                <button href="#" class="Cbtn Cbtn-danger">DELETE</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a-scene renderer="antialias: true; logarithmicDepthBuffer: true" embedded arjs>
+        <a-marker id="marker" preset="hiro">
+        </a-marker>
+        <a-entity camera></a-entity>
+    </a-scene>
+    <script>
+        const web2vr = new Web2VR("#html-container", { parentSelector: "#marker", scale: 550, scroll: false, skybox: false, createControllers: false, rotation: { x: -90 }, position: { x: -0.36, y: 0, z: -0.6 } });
+        web2vr.start();
+        // There is bug from aframe when logarithmicDepthBuffer is enabled. It renders text behind(z position) other objects, one way to deal with this is to disable depthTest for the text component
+        web2vr.aframe.scene.addEventListener("loaded", () => {
+            for (const element of document.querySelectorAll("a-scene *[text]")) {
+                if (element.hasLoaded)
+                    element.components.text.material.depthTest = 0;
+            }
+        }, { once: true });
+    </script>
+</body>
+
+</html>

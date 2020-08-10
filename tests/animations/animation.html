@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tests</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="/dist/web2vr.js"></script>
+    <script src="../embedScene.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <style>
+        #html-container {
+            height: 600px;
+        }
+
+        #anim {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin: 12px;
+        }
+
+        .jello-horizontal {
+            animation: jello-horizontal 0.9s infinite both;
+        }
+
+        @keyframes jello-horizontal {
+            from {
+                background-color: rgb(102, 255, 0);
+            }
+
+            to {
+                background-color: rgb(17, 0, 255);
+            }
+
+            0% {
+                transform: scale3d(1, 1, 1);
+            }
+
+            30% {
+                transform: scale3d(1.25, 0.75, 1);
+            }
+
+            40% {
+                transform: scale3d(0.75, 1.25, 1);
+            }
+
+            50% {
+                transform: scale3d(1.15, 0.85, 1);
+            }
+
+            65% {
+                transform: scale3d(0.95, 1.05, 1);
+            }
+
+            75% {
+                transform: scale3d(1.05, 0.95, 1);
+            }
+
+            100% {
+                transform: scale3d(1, 1, 1);
+            }
+        }
+
+        .move {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: relative;
+            animation-name: example2;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes example2 {
+            0% {
+                background-color: red;
+                left: 0px;
+                top: 0px;
+                transform: scale(1, 1);
+            }
+
+            25% {
+                background-color: yellow;
+                left: 200px;
+                top: 0px;
+            }
+
+            50% {
+                background-color: blue;
+                left: 200px;
+                top: 200px;
+                transform: scale(0.5, 0.5);
+            }
+
+            75% {
+                background-color: green;
+                left: 0px;
+                top: 200px;
+            }
+
+            100% {
+                background-color: red;
+                left: 0px;
+                top: 0px;
+                transform: scale(1, 1);
+            }
+        }
+
+        img {
+            width: 120px;
+            height: 120px;
+            margin: 30px;
+        }
+
+        .spin {
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .bounce-top {
+            animation: bounce-top 0.9s infinite both;
+        }
+
+        @keyframes bounce-top {
+            0% {
+                transform: translateY(-45px);
+                animation-timing-function: ease-in;
+                opacity: 1;
+            }
+
+            24% {
+                opacity: 1;
+            }
+
+            40% {
+                transform: translateY(-24px);
+                animation-timing-function: ease-in;
+            }
+
+            65% {
+                transform: translateY(-12px);
+                animation-timing-function: ease-in;
+            }
+
+            82% {
+                transform: translateY(-6px);
+                animation-timing-function: ease-in;
+            }
+
+            93% {
+                transform: translateY(-4px);
+                animation-timing-function: ease-in;
+            }
+
+            25%,
+            55%,
+            75%,
+            87% {
+                transform: translateY(0px);
+                animation-timing-function: ease-out;
+            }
+
+            100% {
+                transform: translateY(0px);
+                animation-timing-function: ease-out;
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="html-container">
+        <div id="anim" class="jello-horizontal"></div>
+        <img class="spin" src="../assets/road.jpg">
+        <img class="bounce-top" src="../assets/road.jpg">
+        <div class="move"></div>
+    </div>
+    <div id="aframe-container">
+        <a-scene embedded>
+
+        </a-scene>
+    </div>
+    <script>
+        const web2vr = new Web2VR(document.getElementById("html-container"), { debug: true });
+        web2vr.start();
+
+        // For some reason firefox doesnt dispatch event animationstart when creating elements. Have to manually dispatch the event.
+        web2vr.aframe.scene.addEventListener("loaded", () => {
+            const event = new CustomEvent("animationstart");
+            document.getElementById("anim").dispatchEvent(event);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tests</title>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="/dist/web2vr.js"></script>
+    <script src="../embedScene.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <style>
+        #html-container {
+            background-image: url("../assets/background1.png");
+            height: 400px;
+            color: white;
+        }
+
+        p {
+            background-image: url("../assets/background2.jpg");
+            padding: 10px;
+            opacity: 0.6;
+        }
+
+        #gradient1 {
+            width: 300px;
+            height: 100px;
+            background-image: linear-gradient(to right, #43c6ac, #191654);
+        }
+
+        #gradient2 {
+            width: 300px;
+            height: 100px;
+            background: linear-gradient(to left, #f0f2f0, #000c40);
+            opacity: 0.4;
+        }
+
+        .gradient3 {
+            background: linear-gradient(217deg, rgba(255, 0, 0, .8), rgba(255, 0, 0, 0) 70.71%),
+                linear-gradient(127deg, rgba(0, 255, 0, .8), rgba(0, 255, 0, 0) 70.71%),
+                linear-gradient(336deg, rgba(0, 0, 255, .8), rgba(0, 0, 255, 0) 70.71%) !important;
+
+        }
+
+        .move {
+            margin-left: 200px;
+        }
+
+        .size {
+            width: 600px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="html-container">
+        <p id="text">
+            Aliquam rutrum ullamcorper elit, sit amet ullamcorper dui eleifend sed. Vestibulum sed hendrerit mi, at
+            bibendum eros. Proin vulputate pellentesque fringilla. Orci varius natoque penatibus et magnis dis
+            parturient montes, nascetur ridiculus mus. Duis lobortis tincidunt nisi, vitae luctus nisi aliquet eu.
+            Quisque aliquam diam libero, vitae tincidunt nisl semper at. Aenean vitae tellus ut nunc auctor dapibus.
+            Integer erat sem, varius eu sodales non, blandit in est. Quisque luctus lorem in laoreet iaculis. Aliquam
+            ornare sapien urna, vitae venenatis tellus iaculis ac.
+        </p>
+        <div id="gradient1"></div>
+        <div id="gradient2"></div>
+        <button id="btn1">Change width</button>
+        <button id="btn2">Change position</button>
+        <button id="btn3">Change background</button>
+    </div>
+    <div id="aframe-container">
+        <a-scene embedded>
+
+        </a-scene>
+    </div>
+    <script>
+        document.getElementById("btn1").onclick = () => {
+            document.getElementById("text").classList.toggle("size");
+        }
+        document.getElementById("btn2").onclick = () => {
+            document.getElementById("gradient1").classList.toggle("move");
+        }
+        document.getElementById("btn3").onclick = () => {
+            document.getElementById("gradient2").classList.toggle("gradient3");
+        }
+
+        const web2vr = new Web2VR(document.getElementById("html-container"), { debug: true, experimental: true });
+        web2vr.start();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tests</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="/dist/web2vr.js"></script>
+    <script src="../embedScene.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <style>
+        #html-container {
+            flex-direction: row;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="html-container">
+        <button id="btn1">Button</button>
+        <input id="btn2" type="button" value="Input button">
+    </div>
+    <div id="aframe-container">
+        <a-scene embedded>
+
+        </a-scene>
+    </div>
+    <script>
+        document.getElementById("btn1").onclick = () => {
+            console.log("Button clicked");
+        }
+        document.getElementById("btn2").addEventListener("click", () => {
+            console.log("Input button clicked");
+        });
+
+        const web2vr = new Web2VR(document.getElementById("html-container"), { debug: true });
+        web2vr.start();
+    </script>
+</body>
+
+</html>

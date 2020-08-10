@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tests</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="/dist/web2vr.js"></script>
+    <script src="../embedScene.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <style>
+        p {
+            color: greenyellow;
+            background-color: #373B51;
+        }
+
+        .f1 {
+            font-size: 24px;
+        }
+
+        .f2 {
+            font-size: 32px;
+        }
+
+        a {
+            color: orange;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div id="html-container">
+        <p>
+            Lorem ipsum dolor sit amet. Aenean commodo ligula eget dolor. Aenean massa.
+            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+            ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo,
+            Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis
+            fringilla vel, aliquet nec, vulputate eget, arcu.... In enim justo, rhoncus ut, imperdiet a, venenatis
+            vitae,
+            justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper
+            nisi. Aenean vulputate eleifend tellus.
+        </p>
+        <p class="f1">
+            Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies
+            nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero,
+            sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.
+            Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis
+            ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec
+            sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc.
+        </p>
+        <p class="f2">
+            Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.
+            Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius
+            laoreet. Quisque rutrum. Aenean imperdiet.
+        </p>
+        <span>
+            aaa
+        </span>
+        <span>
+            bbbb
+        </span>
+        <span>
+            ccccc
+        </span>
+        <span>
+            dddddd
+        </span>
+        <span>
+            eeeeeee
+        </span>
+        <span>
+            ffffffff
+        </span>
+        <span>
+            ggggggggg
+        </span>
+        <span>
+            zzz
+        </span>
+        <br>
+        <span>
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+        </span>
+        <p>
+            a
+        </p>
+        <p>
+            aa
+        </p>
+        <p>
+            aaa
+        </p>
+        <br>
+        <a href="https://www.google.com/">Google link</a>
+        <br>
+        <a href="https://www.google.com/">link</a>
+    </div>
+    <div id="aframe-container">
+        <a-scene embedded>
+        </a-scene>
+    </div>
+    <script>
+        const web2vr = new Web2VR(document.getElementById("html-container"), { debug: true });
+        web2vr.start();
+    </script>
+</body>
+
+</html>

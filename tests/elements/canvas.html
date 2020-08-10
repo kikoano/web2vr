@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tests</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="/dist/web2vr.js"></script>
+    <script src="../embedScene.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="html-container">
+        <h1>The canvas element</h1>
+
+        <canvas id="myCanvas">
+            Your browser does not support the canvas tag.
+        </canvas>
+    </div>
+    <div id="aframe-container">
+        <a-scene embedded>
+
+        </a-scene>
+    </div>
+    <script>
+        const c = document.getElementById("myCanvas");
+        const ctx = c.getContext("2d");
+        ctx.fillStyle = "red";
+        ctx.fillRect(20, 20, 75, 50);
+
+        //Turn transparency on
+        ctx.globalAlpha = 0.2;
+        ctx.fillStyle = "blue";
+        ctx.fillRect(50, 50, 75, 50);
+        ctx.fillStyle = "green";
+        ctx.fillRect(80, 80, 75, 50);
+
+        const web2vr = new Web2VR(document.getElementById("html-container"), { debug: true });
+        web2vr.start();
+    </script>
+</body>
+
+</html>

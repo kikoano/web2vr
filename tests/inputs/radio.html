@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tests</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="/dist/web2vr.js"></script>
+    <script src="../embedScene.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <div id="html-container">
+        <input type="radio" id="bike" name="vehicle" value="bike">
+        <label for="bike">Bike</label><br>
+        <input type="radio" id="car" name="vehicle" value="car">
+        <label for="car">Car</label><br>
+        <input type="radio" id="boat" name="vehicle" value="boat">
+        <label for="boat">Boat</label>
+    </div>
+    <div id="aframe-container">
+        <a-scene embedded>
+
+        </a-scene>
+    </div>
+    <script>
+        const web2vr = new Web2VR(document.getElementById("html-container"), { debug: true});
+        web2vr.start();
+    </script>
+</body>
+
+</html>

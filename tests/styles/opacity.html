@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tests</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="/dist/web2vr.js"></script>
+    <script src="../embedScene.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <style>
+        #html-container {
+            background-color: white;
+            color: black;
+        }
+
+        .o1 {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .o2 {
+            opacity: 0.5;
+        }
+        .o3 {
+            background-color: rgba(0, 0, 0, 0.1);
+            opacity: 0.9;
+        }
+        .o4 {
+            background-color: rgba(0, 0, 0, 0.9);
+            opacity: 0.1;
+        }
+        .o5 {
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0.5;
+        }
+        .o6 {
+            background-color: rgba(0, 0, 0, 0.8);
+            opacity: 0.2;
+        }
+        .o7 {
+            background-color: rgba(0, 0, 0, 0.9);
+            opacity: 0.7;
+        }
+        .o8 {
+            background-color: rgba(0, 0, 0, 0.3);
+            opacity: 0.4;
+        }
+        .o9 {
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0.6;
+        }
+        .o10 {
+            background-color: rgba(0, 0, 0, 0.7);
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="html-container">
+        <div class="o1">Opacity test</div>
+        <div class="o2">Opacity test</div>
+        <div class="o3">Opacity test</div>
+        <div class="o4">Opacity test</div>
+        <div class="o5">Opacity test</div>
+        <div class="o6">Opacity test</div>
+        <div class="o7">Opacity test</div>
+        <div class="o8">Opacity test</div>
+        <div class="o9">Opacity test</div>
+        <div class="o10">Opacity test</div>
+    </div>
+    <div id="aframe-container">
+        <a-scene embedded>
+
+        </a-scene>
+    </div>
+    <script>
+        const web2vr = new Web2VR(document.getElementById("html-container"), { debug: true });
+        web2vr.start();
+    </script>
+</body>
+
+</html>

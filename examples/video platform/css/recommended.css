@@ -1,0 +1,46 @@
+#recommended {
+    position: absolute;
+    width: 450px;
+    height: 760px;
+    overflow: scroll;
+    background-color: #272A3A;
+    color: #d8dadb;
+    padding-top: 10px;
+    visibility: hidden;
+}
+
+#recommended input[type=checkbox] {
+    transform: scale(1.4);
+}
+
+#recommended label {
+    margin-left: 10px;
+}
+
+#recommendedVideos {
+    margin-left: 15px;
+}
+
+#recommendedVideos .col {
+    padding-left: 0px;
+}
+
+.video:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.video {
+    margin-bottom: 15px;
+}
+
+.videoInfo{
+    color: #bbbbbb;
+}
+
+.currentVideo{
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.infoCol{
+    padding-top: 2px;
+}

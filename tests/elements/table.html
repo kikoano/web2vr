@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tests</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="/dist/web2vr.js"></script>
+    <script src="../embedScene.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid white;
+        }
+
+        thead {
+            color: green;
+        }
+
+        tbody {
+            color: white;
+        }
+
+        tfoot {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="html-container">
+        <h1>Colspan and rowspan</h1>
+
+        <h3>Cell that spans two columns:</h3>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th colspan="2">Phone</th>
+            </tr>
+            <tr>
+                <td>John Doe</td>
+                <td>john.doe@example.com</td>
+                <td>123-45-678</td>
+                <td>212-00-546</td>
+            </tr>
+        </table>
+
+        <h3>Cell that spans two rows:</h3>
+        <table>
+            <tr>
+                <th>Name:</th>
+                <td>John Doe</td>
+            </tr>
+            <tr>
+                <th>Email:</th>
+                <td>john.doe@example.com</td>
+            </tr>
+            <tr>
+                <th rowspan="2">Phone:</th>
+                <td>123-45-678</td>
+            </tr>
+            <tr>
+                <td>212-00-546</td>
+            </tr>
+        </table>
+        <h1>The thead, tbody, and tfoot elements - Styled with CSS</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Month</th>
+                    <th>Savings</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>January</td>
+                    <td>$100</td>
+                </tr>
+                <tr>
+                    <td>February</td>
+                    <td>$80</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Sum</td>
+                    <td>$180</td>
+                </tr>
+            </tfoot>
+        </table>
+        <h1>Vertical-align content in tfoot</h1>
+
+        <table style="width:50%">
+            <tr>
+                <th>Month</th>
+                <th>Savings</th>
+            </tr>
+            <tr>
+                <td>January</td>
+                <td>$100</td>
+            </tr>
+            <tr>
+                <td>February</td>
+                <td>$80</td>
+            </tr>
+            <tfoot style="vertical-align:bottom">
+                <tr style="height:100px">
+                    <td>Sum</td>
+                    <td>$180</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div id="aframe-container">
+        <a-scene embedded>
+
+        </a-scene>
+    </div>
+    <script>
+        const web2vr = new Web2VR(document.getElementById("html-container"), { debug: true });
+        web2vr.start();
+    </script>
+</body>
+
+</html>

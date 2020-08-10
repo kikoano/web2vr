@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tests</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="/dist/web2vr.js"></script>
+    <script src="../embedScene.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <style>
+        img {
+            border-style: solid;
+            border-width: 4px;
+            border-color: blue;
+        }
+
+        p {
+            color: green;
+            border-style: solid;
+            border-width: 8px;
+            border-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="html-container">
+        <img src="../assets/rifts.png" alt="">
+        <p>Text inside white border!</p>
+        <input type="text">
+        <button id="change">Change</button>
+    </div>
+    <div id="aframe-container">
+        <a-scene embedded>
+
+        </a-scene>
+    </div>
+    <script>
+        const change = document.getElementById("change");
+        change.onclick = () => {
+            document.querySelectorAll("#html-container *").forEach(e => {
+                e.style.borderColor = "black";
+                e.style.borderWidth = "8px";
+            })
+        }
+
+        const web2vr = new Web2VR(document.getElementById("html-container"),{debug:true});
+        web2vr.start();
+    </script>
+</body>
+
+</html>

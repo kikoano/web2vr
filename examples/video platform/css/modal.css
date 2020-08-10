@@ -1,0 +1,26 @@
+#modal {
+    position: absolute;
+    width: 250px;
+    text-align: center;
+    color: white;
+    background: rgb(39, 42, 58);
+    font-size: 26px;
+    visibility: hidden;
+}
+
+#modal p {
+    margin: 0px;
+}
+
+@keyframes rotate-hor-center {
+    0% {
+        transform: translateZ(0) rotateX(0);
+    }
+    100% {
+        transform: translateZ(180px) rotateX(-360deg);
+    }
+}
+
+.rotate-hor-center {
+    animation: rotate-hor-center 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+}

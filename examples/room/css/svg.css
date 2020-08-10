@@ -1,0 +1,10 @@
+#svg {
+    background-color: rgb(240, 240, 240);
+    width: 580px;
+    height: 480px;
+    position: absolute;
+}
+
+.bar {
+    fill: steelblue;
+}

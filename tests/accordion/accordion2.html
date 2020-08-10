@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tests</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="/dist/web2vr.js"></script>
+    <script src="../embedScene.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <style>
+        #accordion h1 {
+            line-height: 1.2;
+            font-size: 20px;
+            background-color: rgba(255, 0, 0, 0.3);
+            margin: 0;
+            padding: 10px 10px 10px 30px;
+            color: black;
+        }
+
+        #accordion section {
+            overflow: hidden;
+            height: 220px;
+            border: 1px #333 solid;
+        }
+
+        #accordion p {
+            padding: 0 10px;
+        }
+
+        #accordion section.ac_hidden p {
+            color: #fff;
+        }
+
+        #accordion section.ac_hidden {
+            height: 40px;
+        }
+
+        #accordion section:not(.ac_hidden) {
+            height: 220px;
+        }
+
+        #accordion img {
+            width: 150px;
+            padding-left: 10px;
+        }
+
+        #accordion section:not(.ac_hidden) h1 {
+            background-color: rgba(255, 0, 0, 0.7);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="html-container">
+        <div id="accordion">
+            <section id="item1" class="">
+                <h1>A long paragraph</h1>
+                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                    Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit
+                    amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit
+                    amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae,
+                    ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci,
+                    sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent
+                    dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat.
+                    Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.
+                    Vestibulum erat wisi, condimentum sed, commodo vitae,
+                    ornare sit amet.
+                </p>
+            </section>
+            <section id="item2" class="ac_hidden">
+                <h1>A medium paragraph</h1>
+                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                    Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit
+                    amet quam egestas semper.</p>
+                <img src="../assets/snow.jpg">
+            </section>
+            <section id="item3" class="ac_hidden">
+                <h1>Two short paragraphs</h1>
+                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                    Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.</p>
+                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                    Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.</p>
+                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                    Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.</p>
+            </section>
+        </div>
+    </div>
+    <div id="aframe-container">
+        <a-scene embedded>
+
+        </a-scene>
+    </div>
+    <script>
+        document.querySelectorAll("section h1").forEach(e => {
+            e.onclick = () => {
+                document.querySelectorAll("section").forEach(e => {
+                    e.classList.add("ac_hidden");
+                });
+                e.parentElement.classList.remove("ac_hidden");
+            }
+        });
+
+        const web2vr = new Web2VR(document.getElementById("html-container"), { debug: true });
+        web2vr.start();
+    </script>
+</body>
+
+</html>

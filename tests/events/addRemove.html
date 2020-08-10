@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tests</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="/dist/web2vr.js"></script>
+    <script src="../embedScene.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+            background-color: red;
+            color: teal;
+        }
+
+        .image {
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="html-container">
+        <button id="addText">Add text node</button>
+        <input type="button" id="addElement" value="Add element node">
+        <button id="addImage">Add image</button>
+        <button id="removeElements">Remove elemens</button>
+        <div style="margin:10px" id="elements">
+        </div>
+    </div>
+    <div id="aframe-container">
+        <a-scene embedded>
+
+        </a-scene>
+    </div>
+    <script>
+        document.getElementById("addText").addEventListener("click", () => {
+            const text = document.createTextNode(" Text Node");
+            document.getElementById("elements").appendChild(text);
+        });
+
+        document.getElementById("addElement").onclick = () => {
+            const box = document.createElement("div");
+            box.classList.add("box");
+            box.innerHTML = "BOX<small>box</small>BOX";
+            document.getElementById("elements").appendChild(box);
+        };
+
+        document.getElementById("addImage").onclick = () => {
+            const div = document.createElement("div");
+            div.classList.add("image");
+            document.getElementById("elements").appendChild(div);
+            const image = document.createElement("img");
+            image.width = 100;
+            image.height = 100;
+            image.src = "../assets/timeScapesThumb.png";
+            div.appendChild(image);
+        }
+        document.getElementById("removeElements").onclick = () => {
+            [...document.getElementById("elements").childNodes].forEach(node => node.remove());
+        };
+
+        const web2vr = new Web2VR(document.getElementById("html-container"), { debug: true });
+        web2vr.start();
+    </script>
+</body>
+
+</html>

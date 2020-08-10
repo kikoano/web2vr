@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Room</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="/dist/web2vr.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="/tests/bootstrap/animate.min.css">
+    <link rel="stylesheet" href="./css/contactForm.css">
+    <link rel="stylesheet" href="./css/chatBox.css">
+    <link rel="stylesheet" href="./css/signIn.css">
+    <link rel="stylesheet" href="./css/staticTable.css">
+    <link rel="stylesheet" href="./css/carouselSlider.css">
+    <link rel="stylesheet" href="./css/svg.css">
+    <link rel="stylesheet" href="./css/accordion.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <style>
+        #video {
+            position: absolute;
+            width: 800px;
+        }
+
+        #gifImage{
+            position: absolute;
+            width: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <video id="video" control>
+        <source src="/tests/assets/timeScapes.mp4" type="video/mp4">
+    </video>
+    <div id="contact-form">
+        <div class="container contact">
+            <div class="row">
+                <div id="contactTitle" class="col-3">
+                    <div class="contact-info">
+                        <img src="https://image.ibb.co/kUASdV/contact-image.png" alt="image" />
+                        <h2>Contact Us</h2>
+                        <h4>We would love to hear from you !</h4>
+                    </div>
+                </div>
+                <div id="contactForm" class="col-9">
+                    <div class="contact-form">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="fname">First Name:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="fname" placeholder="Enter First Name"
+                                    name="fname">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="lname">Last Name:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="lname" placeholder="Enter Last Name"
+                                    name="lname">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="email">Email:</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="email" placeholder="Enter email"
+                                    name="email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="comment">Comment:</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" rows="5" id="comment"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-default">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="chat-box">
+        <div class="container">
+            <div class="messaging">
+                <div class="inbox_msg">
+                    <div class="inbox_people">
+                        <div class="headind_srch">
+                            <div class="recent_heading">
+                                <h4>Recent</h4>
+                            </div>
+                            <div class="srch_bar">
+                                <div class="stylish-input-group">
+                                    <input type="text" class="search-bar" placeholder="Search">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="inbox_chat">
+                            <div class="chat_list active_chat">
+                                <div class="chat_people">
+                                    <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png"
+                                            alt="sunil"> </div>
+                                    <div class="chat_ib">
+                                        <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                                        <p>Test, which is a new approach to have all solutions
+                                            astrology under one roof.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chat_list">
+                                <div class="chat_people">
+                                    <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png"
+                                            alt="sunil"> </div>
+                                    <div class="chat_ib">
+                                        <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                                        <p>Test, which is a new approach to have all solutions
+                                            astrology under one roof.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chat_list">
+                                <div class="chat_people">
+                                    <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png"
+                                            alt="sunil"> </div>
+                                    <div class="chat_ib">
+                                        <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                                        <p>Test, which is a new approach to have all solutions
+                                            astrology under one roof.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chat_list">
+                                <div class="chat_people">
+                                    <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png"
+                                            alt="sunil"> </div>
+                                    <div class="chat_ib">
+                                        <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                                        <p>Test, which is a new approach to have all solutions
+                                            astrology under one roof.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mesgs">
+                        <div class="msg_history">
+                            <div class="incoming_msg">
+                                <div class="incoming_msg_img"> <img
+                                        src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                <div class="received_msg">
+                                    <div class="received_withd_msg">
+                                        <p>Test which is a new approach to have all
+                                            solutions</p>
+                                        <span class="time_date"> 11:01 AM | June 9</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="outgoing_msg">
+                                <div class="sent_msg">
+                                    <p>Test which is a new approach to have all
+                                        solutions</p>
+                                    <span class="time_date"> 11:01 AM | June 9</span>
+                                </div>
+                            </div>
+                            <div class="incoming_msg">
+                                <div class="incoming_msg_img"> <img
+                                        src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                <div class="received_msg">
+                                    <div class="received_withd_msg">
+                                        <p>Test, which is a new approach to have</p>
+                                        <span class="time_date"> 11:01 AM | Yesterday</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="outgoing_msg">
+                                <div class="sent_msg">
+                                    <p>Apollo University, Delhi, India Test</p>
+                                    <span class="time_date"> 11:01 AM | Today</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="type_msg">
+                            <div class="input_msg_write">
+                                <input type="text" class="write_msg" placeholder="Type a message" />
+                                <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o"
+                                        aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="sign-in">
+        <div class="container">
+            <br>
+            <p class="text-center">More bootstrap 4 components on <a
+                    href="http://webublogoverflow.com/">webublogoverflow.com</a></p>
+            <hr>
+
+            <div class="row">
+                <aside class="col-6">
+                    <p>with us</p>
+                    <div class="card">
+                        <article class="card-body">
+                            <a href="" class="float-right btn btn-outline-primary">Sign up</a>
+                            <h4 class="card-title mb-4 mt-1">Choose us</h4>
+                            <form>
+                                <div class="form-group">
+                                    <label>Your email</label>
+                                    <input name="" class="form-control" placeholder="Email" type="email">
+                                </div> <!-- form-group// -->
+                                <div class="form-group">
+                                    <a class="float-right" href="#">Forgot?</a>
+                                    <label>Your password</label>
+                                    <input class="form-control" placeholder="******" type="password">
+                                </div> <!-- form-group// -->
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label> <input type="checkbox"> Save password </label>
+                                    </div> <!-- checkbox .// -->
+                                </div> <!-- form-group// -->
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block"> Login </button>
+                                </div> <!-- form-group// -->
+                            </form>
+                        </article>
+                    </div> <!-- card.// -->
+
+                </aside> <!-- col.// -->
+                <aside class="col-6">
+                    <p>Inter in</p>
+
+                    <div class="card">
+                        <article class="card-body">
+                            <a href="" class="float-right btn btn-outline-primary">Sign up</a>
+                            <h4 class="card-title mb-4 mt-1">Sign in</h4>
+                            <p>
+                                <a href="" class="btn btn-block btn-outline-info"> <i class="fab fa-twitter"></i>  
+                                    Login via Twitter</a>
+                                <a href="" class="btn btn-block btn-outline-primary"> <i class="fab fa-facebook-f"></i>
+                                      Login via facebook</a>
+                            </p>
+                            <hr>
+                            <form>
+                                <div class="form-group">
+                                    <input name="" class="form-control" placeholder="Email or login" type="email">
+                                </div> <!-- form-group// -->
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="******" type="password">
+                                </div> <!-- form-group// -->
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary btn-block"> Login </button>
+                                        </div> <!-- form-group// -->
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <a class="small" href="#">Forgot password?</a>
+                                    </div>
+                                </div> <!-- .row// -->
+                            </form>
+                    </div> <!-- card.// -->
+
+                </aside> <!-- col.// -->
+            </div> <!-- row.// -->
+
+        </div>
+        <!--container end.//-->
+
+        <br><br><br>
+
+        <footer class="kilimanjaro_area">
+            <!-- Top Footer Area Start -->
+            <div class="foo_top_header_one section_padding_100_70">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="kilimanjaro_part">
+                                <h5>About Us</h5>
+                                <p>It includes rich features & contents. It's designed & developed based on One Page/
+                                    Multi-page Layout,blog themes,world press themes and blogspot. You can use any
+                                    layout from any demo anywhere.</p>
+                                <p>webblogoverflow is completely creative, clean & 100% responsive website. Put your
+                                    business into next level with Webublogoverflow.</p>
+                            </div>
+                            <div class="kilimanjaro_part m-top-15">
+                                <h5>Social Links</h5>
+                                <ul class="kilimanjaro_social_links">
+                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a></li>
+                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a></li>
+                                    <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i> Pinterest</a>
+                                    </li>
+                                    <li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i> YouTube</a></li>
+                                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i> Linkedin</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="kilimanjaro_part">
+                                <h5>Tags Widget</h5>
+                                <ul class=" kilimanjaro_widget">
+                                    <li><a href="#">Classy</a></li>
+                                    <li><a href="#">Blog</a></li>
+                                    <li><a href="#">Creative</a></li>
+                                    <li><a href="#">One Page</a></li>
+                                    <li><a href="#">Multipurpose</a></li>
+                                    <li><a href="#">Minimal</a></li>
+                                    <li><a href="#">Classic</a></li>
+                                    <li><a href="#">Medical</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="kilimanjaro_part m-top-15">
+                                <h5>Important Links</h5>
+                                <ul class="kilimanjaro_links">
+                                    <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Terms &
+                                            Conditions</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>About
+                                            Licences</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Help &
+                                            Support</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Careers</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Privacy
+                                            Policy</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Community &
+                                            Forum</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="kilimanjaro_part">
+                                <h5>Latest News</h5>
+                                <div class="kilimanjaro_blog_area">
+                                    <div class="kilimanjaro_thumb">
+
+
+                                    </div>
+                                    <a href="#">Your Blog Title Goes Here</a>
+                                    <p class="kilimanjaro_date">21 Jan 2018</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur</p>
+                                </div>
+                                <div class="kilimanjaro_blog_area">
+                                    <div class="kilimanjaro_thumb">
+
+                                    </div>
+                                    <a href="#">Your Blog Title Goes Here</a>
+                                    <p class="kilimanjaro_date">21 Jan 2018</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur</p>
+                                </div>
+                                <div class="kilimanjaro_blog_area">
+                                    <div class="kilimanjaro_thumb">
+
+                                    </div>
+                                    <a href="#">Your Blog Title Goes Here</a>
+                                    <p class="kilimanjaro_date">21 Jan 2018</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="kilimanjaro_part">
+                                <h5>Quick Contact</h5>
+                                <div class="kilimanjaro_single_contact_info">
+                                    <h5>Phone:</h5>
+                                    <p>+255 789 54 50 40 <br> +2255 766 90 94 00</p>
+                                </div>
+                                <div class="kilimanjaro_single_contact_info">
+                                    <h5>Email:</h5>
+                                    <p>support@webblogoverflow.com <br> luckmoshy@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer Bottom Area Start -->
+            <div class=" kilimanjaro_bottom_header_one section_padding_50 text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <p>© All Rights Reserved by <a href="#">Webublogoverflow.blogspot -(with all love)<i
+                                        class="fa fa-love"></i></a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div id="static-table">
+        <table id="customers">
+            <tr>
+                <th>Company</th>
+                <th>Contact</th>
+                <th>Country</th>
+            </tr>
+            <tr>
+                <td>Alfreds Futterkiste</td>
+                <td>Maria Anders</td>
+                <td>Germany</td>
+            </tr>
+            <tr>
+                <td>Berglunds snabbköp</td>
+                <td>Christina Berglund</td>
+                <td>Sweden</td>
+            </tr>
+            <tr>
+                <td>Centro comercial Moctezuma</td>
+                <td>Francisco Chang</td>
+                <td>Mexico</td>
+            </tr>
+            <tr>
+                <td>Ernst Handel</td>
+                <td>Roland Mendel</td>
+                <td>Austria</td>
+            </tr>
+            <tr>
+                <td>Island Trading</td>
+                <td>Helen Bennett</td>
+                <td>UK</td>
+            </tr>
+            <tr>
+                <td>Königlich Essen</td>
+                <td>Philip Cramer</td>
+                <td>Germany</td>
+            </tr>
+            <tr>
+                <td>Laughing Bacchus Winecellars</td>
+                <td>Yoshi Tannamuri</td>
+                <td>Canada</td>
+            </tr>
+            <tr>
+                <td>Magazzini Alimentari Riuniti</td>
+                <td>Giovanni Rovelli</td>
+                <td>Italy</td>
+            </tr>
+            <tr>
+                <td>North/South</td>
+                <td>Simon Crowther</td>
+                <td>UK</td>
+            </tr>
+            <tr>
+                <td>Paris spécialités</td>
+                <td>Marie Bertrand</td>
+                <td>France</td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="carousel-slider">
+        <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="mask flex-center">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-7 order-1 order-2">
+                                    <h4>Present your <br>
+                                        awesome product</h4>
+                                    <p>Lorem ipsum dolor sit amet. Reprehenderit, qui blanditiis quidem rerum <br>
+                                        necessitatibus praesentium voluptatum deleniti atque corrupti.</p>
+                                    <a href="#">BUY NOW</a>
+                                </div>
+                                <div class="col-5 order-2 order-1"><img src="/tests/assets/watch.png" class="mx-auto"
+                                        alt="slide"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="mask flex-center">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-7 order-1 order-2">
+                                    <h4>Present your <br>
+                                        awesome product</h4>
+                                    <p>Lorem ipsum dolor sit amet. Reprehenderit, qui blanditiis quidem rerum <br>
+                                        necessitatibus praesentium voluptatum deleniti atque corrupti.</p>
+                                    <a href="#">BUY NOW</a>
+                                </div>
+                                <div class="col-5 order-2 order-1"><img src="/tests/assets/product.png" class="mx-auto"
+                                        alt="slide"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="mask flex-center">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-7 order-1 order-2">
+                                    <h4>Present your <br>
+                                        awesome product</h4>
+                                    <p>Lorem ipsum dolor sit amet. Reprehenderit, qui blanditiis quidem rerum <br>
+                                        necessitatibus praesentium voluptatum deleniti atque corrupti.</p>
+                                    <a href="#">BUY NOW</a>
+                                </div>
+                                <div class="col-5 order-2 order-1"><img src="/tests/assets/drone.png" class="mx-auto"
+                                        alt="slide"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev"> <span
+                    class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span>
+            </a> <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next"> <span
+                    class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
+        </div>
+        <!--slide end-->
+    </div>
+
+    <div id="svg">
+        <svg width="600" height="500"></svg>
+    </div>
+
+    <div id="accordion">
+        <h2>Accordion</h2>
+
+        <button class="accordion">Section 1</button>
+        <div class="panel">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat.</p>
+        </div>
+
+        <button class="accordion">Section 2</button>
+        <div class="panel">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat.</p>
+        </div>
+
+        <button class="accordion">Section 3</button>
+        <div class="panel">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat.</p>
+        </div>
+    </div>
+
+    <img id="gifImage" src="/tests/assets/fluid.gif">
+
+    <a-scene renderer="colorManagement:true;" shadow="type: pcfsoft">
+        <a-assets>
+            <a-asset-item id="room" src="./assets/room.glb"></a-asset-item>
+        </a-assets>
+
+        <a-entity position="0.2 0 0" scale="0.1 0.1 0.1" rotation="0 180 0" gltf-model="#room" shadow></a-entity>
+        <a-entity geometry="primitive: plane; height: 1.93; width: 0.485" shadow material="opacity: 0"
+            position="-1.49977 1.16952 1.44568" rotation="0 -90 0"></a-entity>
+        <a-entity geometry="primitive: plane; height: 1.1; width: 0.405" shadow material="opacity: 0"
+            position="0.64843 1.5725 2.155"></a-entity>
+        <a-entity geometry="primitive: plane; height: 1.1; width: 0.405" shadow material="opacity: 0"
+            position="0.01066 1.5725 2.155"></a-entity>
+
+        <a-entity light="type: ambient; intensity: 0.08;"></a-entity>
+        <a-entity light="intensity: 1; penumbra: 0.3; type: spot; angle: 75;" position="0.19847 2.25911 -0.11859"
+            rotation="-90 0 0"></a-entity>
+        <a-entity light="intensity: 0.45; castShadow: true; type: point" position="0.198 2.10912 -0.119"></a-entity>
+        <a-entity light="intensity: 3; type: point; distance: 0.25" position="0.198 2.10912 -0.119"></a-entity>
+    </a-scene>
+    <script src="./js/generateSvg.js"></script>
+    <script>
+        const videoVR = new Web2VR("#video", { scale: 1700, position: { x: -1.300, y: 1.158, z: 0.368 }, rotation: { y: 90 } });
+        videoVR.start();
+
+        // add shadow cast to hands
+        document.getElementById("leftHand").setAttribute("shadow", "receive: false;");
+        document.getElementById("rightHand").setAttribute("shadow", "receive: false;");
+
+        const contactFormVR = new Web2VR("#contact-form", { position: { x: -0.35, y: 2, z: 2.044 }, rotation: { y: 180 } });
+        contactFormVR.start();
+
+        const chatBoxVR = new Web2VR("#chat-box", { position: { x: -0.837, y: 1.850, z: -1.420 } });
+        chatBoxVR.start();
+
+        const signInVR = new Web2VR("#sign-in", { position: { x: 1.784, y: 2.075, z: -0.107 }, rotation: { y: 270 } });
+        signInVR.start();
+
+        const staticTableVR = new Web2VR("#static-table", { position: { x: 1.784, y: 1.8, z: -1.8 }, rotation: { y: 270 } });
+        staticTableVR.start();
+
+        $("#myCarousel").carousel({
+            interval: 8000,
+        });
+
+        const carouselSliderVR = new Web2VR("#carousel-slider", { position: { x: -1.399, y: 1.758, z: 0.660 }, rotation: { y: 90 } });
+        carouselSliderVR.start();
+
+        const svgVR = new Web2VR("#svg", { scale: 1200, position: { x: 0.522, y: 0.778, z: 1.942 }, rotation: { x: -20, y: -180 } });
+        window.addEventListener("load", () => {
+            svgVR.start();
+        });
+
+        const accordionVR = new Web2VR("#accordion", { position: { x: -1.399, y: 1.679, z: -0.666 }, rotation: { y: 90 } });
+        accordionVR.start();
+
+        const acc = document.getElementsByClassName("accordion");
+
+        for (let i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                const panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+
+        const gifImageVR = new Web2VR("#gifImage", { position: { x: 1.821, y: 1.801, z: 2.047 }, rotation: { y: 180 } });
+        gifImageVR.start();
+
+    </script>
+</body>
+
+</html>

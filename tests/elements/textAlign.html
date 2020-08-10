@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tests</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="/dist/web2vr.js"></script>
+    <script src="../embedScene.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <style>
+        .col {
+            float: left;
+            width: 220px;
+        }
+
+        .c1 {
+            font-size: 20px;
+        }
+
+        .c2 {
+            text-align: center;
+            font-size: 18px;
+            padding-bottom: 40px;
+        }
+
+        .c3 {
+            text-align: right;
+            font-size: 18px;
+        }
+        .p1{
+            padding-left: 20px;
+        }
+        .p2{
+            padding-right: 30px;
+            padding-top: 40px;
+        }
+        .p3{
+            padding:20px;
+        }
+
+        .row {
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="html-container">
+        <div class="row">
+            <div class="col c1">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
+                massa. In enim justo natoque penatibus et magnis dis parturient montes.
+            </div>
+            <div class="col c2">
+                In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis
+                pretium. Integer tincidunt.
+                Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.
+                Nam eget dui. Etiam rhoncus.
+            </div>
+            <div class="col c3">
+                Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt
+                tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros
+                faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col c1 p1">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
+                massa. In
+                enim justo natoque penatibus et magnis dis parturient montes.
+            </div>
+            <div class="col c2 p2">
+                In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis
+                pretium.
+                Integer tincidunt.
+                Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.
+                Nam
+                eget dui. Etiam rhoncus.
+            </div>
+            <div class="col c3 p3">
+                Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt
+                tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros
+                faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna.
+            </div>
+        </div>
+        <div style="text-align: center;"></div>
+    </div>
+    <div id="aframe-container">
+        <a-scene embedded>
+        </a-scene>
+    </div>
+    <script>
+        const web2vr = new Web2VR(document.getElementById("html-container"), { debug: true });
+        web2vr.start();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tests</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="/dist/web2vr.js"></script>
+    <script src="../embedScene.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <style>
+        #html-container {
+            background-image: url("../assets/background1.png");
+            background-size: cover;
+            height: 400px;
+            color: white;
+        }
+
+        p {
+            background-image: url("../assets/background2.jpg");
+            background-size: cover;
+            padding: 10px 10px 10px 10px;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="html-container">
+        <p>
+            Aliquam rutrum ullamcorper elit, sit amet ullamcorper dui eleifend sed. Vestibulum sed hendrerit mi, at
+            bibendum eros. Proin vulputate pellentesque fringilla. Orci varius natoque penatibus et magnis dis
+            parturient montes, nascetur ridiculus mus. Duis lobortis tincidunt nisi, vitae luctus nisi aliquet eu.
+            Quisque aliquam diam libero, vitae tincidunt nisl semper at. Aenean vitae tellus ut nunc auctor dapibus.
+            Integer erat sem, varius eu sodales non, blandit in est. Quisque luctus lorem in laoreet iaculis. Aliquam
+            ornare sapien urna, vitae venenatis tellus iaculis ac.
+        </p>
+    </div>
+    <div id="aframe-container">
+        <a-scene embedded>
+
+        </a-scene>
+    </div>
+    <script>
+        const web2vr = new Web2VR(document.getElementById("html-container"), { debug: true });
+        web2vr.start();
+    </script>
+</body>
+
+</html>

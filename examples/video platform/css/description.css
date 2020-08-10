@@ -1,0 +1,70 @@
+#description {
+    position: absolute;
+    width: 450px;
+    height: 760px;
+    background-color: #272A3A;
+    color: #d8dadb;
+    visibility: hidden;
+}
+
+#channel-container {
+    margin-top: 10px;
+}
+
+#title {
+    font-size: 32px;
+}
+
+#views {
+    font-size: 22px;
+    color: #bbbbbb;
+}
+
+.like-dislike {
+    width: 50px;
+}
+
+#details {
+    font-size: 20px;
+    color: #bbbbbb;
+}
+
+#details p{
+    background-color: #313448;
+    padding: 5px;
+}
+
+#likes span, #dislikes span {
+    float: right;
+    margin-left: 5px;
+    margin-top: 5px;
+    font-size: 22px;
+}
+
+#avatar {
+    width: 100px;
+    height: 100px;
+    border: 1px solid white;
+}
+
+#channel-container img {
+    float: left;
+}
+
+#channel {
+    float: left;
+}
+
+#subscribers {
+    float: left;
+    color: #bbbbbb;
+}
+
+#channel-info {
+    font-size: 20px;
+    margin-left: 120px;
+}
+
+#upload-date {
+    font-size: 26px;
+}
