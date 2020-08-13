@@ -2,8 +2,8 @@
     {
         "id": 1,
         "title": "Time Scapes",
-        "thumbnail": "/tests/assets/timeScapesThumb.png",
-        "url": "/tests/assets/timeScapes.mp4",
+        "thumbnail": "../../tests/assets/timeScapesThumb.png",
+        "url": "../../tests/assets/timeScapes.mp4",
         "vr": false,
         "lenght": "2:12",
         "views": "1,623,588",
@@ -117,8 +117,8 @@
     {
         "id": 8,
         "title": "Time Scapes",
-        "thumbnail": "/tests/assets/timeScapesThumb.png",
-        "url": "/tests/assets/timeScapes.mp4",
+        "thumbnail": "../../tests/assets/timeScapesThumb.png",
+        "url": "../../tests/assets/timeScapes.mp4",
         "vr": false,
         "lenght": "2:12",
         "views": "1,623,588",
