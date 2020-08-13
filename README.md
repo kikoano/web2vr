@@ -1,12 +1,12 @@
 
 # Web2VR
 <p float="left">
-<img width=310 src="docs/images/show.gif">
-<img width=310 src="docs/images/scroll.gif">
-<img width=310 src="docs/images/animations.gif">
-<img width=310 src="docs/images/drag.gif">
-<img width=310 src="docs/images/input.gif">
-<img width=310 src="docs/images/attach.gif">
+<img width=270 src="docs/images/show.gif">
+<img width=270 src="docs/images/scroll.gif">
+<img width=270 src="docs/images/animations.gif">
+<img width=270 src="docs/images/drag.gif">
+<img width=270 src="docs/images/input.gif">
+<img width=270 src="docs/images/attach.gif">
 </p>
 Web2VR is library for A-Frame web framework. Dynamically translate HTML and CSS to A-Frame 3D world for virtual reality.
 <br>
