@@ -22,20 +22,15 @@ Video showing Web2VR features
 You can view the examples with VR or Non-VR. Drag and stretch features only available for VR.
 
 ***Controls for VR:***
-
-Use trigger button to click.
-
-Use grip button to drag.
-
-Use both grip buttons to stretch.
+- Use trigger button to click.
+- Use grip button to drag.
+- Use both grip buttons to stretch.
 
 ***Controls for Non-VR:***
+- Use WASD keys to move.
+- User can move camera (look around), by holding left mouse button and moving mouse.
+- Use left mouse button to click.
 
-Use WASD keys to move.
-
-User can move camera (look around), by holding left mouse button and moving mouse.
-
-Use left mouse button to click.
 ### AR
 DEMO
 
