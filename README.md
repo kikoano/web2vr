@@ -32,21 +32,21 @@ You can view the examples with VR or Non-VR. Drag and stretch features only avai
 - Use left mouse button to click.
 
 ### AR
-DEMO
+[DEMO](https://kikoano.github.io/web2vr/examples/ar)
 
 Simple use of [AR.js](https://github.com/AR-js-org/AR.js) with [hiro image](https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/hiro.png) marker to display web2vr elements. User needs camera.
 ### Room
-DEMO
+[DEMO](https://kikoano.github.io/web2vr/examples/room)
 
 Room 3D model with lots of bootstrap examples placed everywhere. Examples are taken from [Bootsnipp](https://bootsnipp.com/). Each example shows a feature of Web2VR. Low-end computers may get lower performance because of the room model and lighting.
 ### Video platform
-DEMO
+[DEMO](https://kikoano.github.io/web2vr/examples/video%20platform)
 
 This is full working web app of video platform that is entirely written with HTML, CSS and JS then translated to web2vr elements.
 Entire web app has dynamic elements to show that Web2VR works with dynamic elements.
 If the user is viewing in Non-VR then the watch will be shown in the top left corner of the window.
 ### Tests
-DEMO
+[DEMO](https://kikoano.github.io/web2vr/tests)
 
 Left window is normal browser HTML while right side is translated version in A-Frame.
 ## Features
@@ -76,7 +76,7 @@ Install and use directly by including the [browser files](https://github.com/kik
 
 <head>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="/dist/web2vr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web2vr@1.0.0/dist/web2vr.min.js"></script>
     <style>
         #html-container{
             position: absolute;
