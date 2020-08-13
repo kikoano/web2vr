@@ -1,16 +1,20 @@
 {
   "name": "web2vr",
   "version": "1.0.0",
-  "description": "Html to VR",
-  "main": "main.js",
+  "description": "Dynamically translate HTML and CSS to A-Frame 3D world for virtual reality.",
+  "main": "dist/web2vr.js",
+  "files":[
+    "dist",
+    "src"
+  ],
   "dependencies": {
-    "aframe": "^1.0.4",
     "aframe-gif-shader": "^0.9.1",
     "aframe-super-keyboard": "^2.0.2",
     "deepmerge": "^4.2.2",
     "super-hands": "^3.0.0"
   },
   "devDependencies": {
+    "aframe": "^1.0.4",
     "@babel/core": "^7.9.0",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-private-methods": "^7.8.3",
@@ -25,6 +29,29 @@
     "dev": "webpack --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js"
   },
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kikoano/web2vr.git"
+  },
+  "keywords": [
+    "web2vr",
+    "aframe",
+    "aframe-component",
+    "aframe-vr",
+    "vr",
+    "mozvr",
+    "webvr",
+    "webxr",
+    "three",
+    "three.js",
+    "virtual-reality",
+    "augmented-reality",
+    "3d"
+  ],
+  "author": "kikoano",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kikoano/web2vr/issues"
+  },
+  "homepage": "https://github.com/kikoano/web2vr#readme"
 }
