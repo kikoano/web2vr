@@ -16,7 +16,7 @@ const xScale = d3.scaleBand().range([0, width]).padding(0.4),
 const g = svg.append("g")
     .attr("transform", "translate(" + 100 + "," + 100 + ")");
 
-d3.csv("/tests/svg/XYZ.csv", (error, data) => {
+d3.csv("../../../tests/svg/XYZ.csv", (error, data) => {
     if (error) {
         throw error;
     }
