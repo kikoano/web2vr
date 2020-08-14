@@ -79,7 +79,7 @@
 #myCarousel {
     position: relative;
     z-index: 0;
-    background: url(/tests/assets/carouselBackground.jpg) center center no-repeat;
+    background: url(../../../tests/assets/carouselBackground.jpg) center center no-repeat;
     background-size: cover;
 }
 
