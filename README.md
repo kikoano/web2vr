@@ -94,7 +94,7 @@ Install and use directly by including the [browser files](https://github.com/kik
 <body>
     <div id="html-container">
         Welcome to Web2VR!
-        <button id="btn">Click me</button>
+        <button id="btn">Click me!</button>
         <div id="info"></div>
     </div>
     <script>
