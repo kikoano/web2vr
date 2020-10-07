@@ -6040,7 +6040,8 @@ var Web2VR = /*#__PURE__*/function () {
   }, {
     key: "update",
     value: function update() {
-      // we check for updating so we dont do multiple updating at same time from the async functions
+      var t1 = performance.now(); // we check for updating so we dont do multiple updating at same time from the async functions
+
       this.updating = true;
 
       if (this.updating) {
@@ -6066,6 +6067,10 @@ var Web2VR = /*#__PURE__*/function () {
         this.scroll.update();
         this.updating = false;
       }
+
+      var t2 = performance.now(); // measure update performance
+
+      if (this.settings.debug) console.log("Update time: " + (t2 - t1) + ms);
     }
   }]);
 

@@ -275,6 +275,7 @@ export default class Web2VR {
     }
 
     update() {
+        const t1 = performance.now();
         // we check for updating so we dont do multiple updating at same time from the async functions
         this.updating = true;
         if (this.updating) {
@@ -289,5 +290,9 @@ export default class Web2VR {
             this.scroll.update();
             this.updating = false;
         }
+        const t2 = performance.now();
+        // measure update performance
+        if (this.settings.debug)
+            console.log("Update time: " + (t2 - t1) + ms);
     }
 }
