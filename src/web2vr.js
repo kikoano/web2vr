@@ -52,6 +52,14 @@ export default class Web2VR {
 
         // experimental only
         this.html2canvasIDcounter = 0;
+
+        // calling element update if dom element has been resize
+        // cannot continue implementing ResizeObserver because it doesnt work on mobile devices when in VR like Oculus GO, Oculus Quest, Android phones...
+        this.resizeObserver = new ResizeObserver(entries => {
+            for (const entry of entries) {
+                console.log("entry", entry);
+            }
+        });
     }
 
     // find all hover css rules and add {selector}hover class to them
@@ -212,6 +220,8 @@ export default class Web2VR {
                 parentElement.childElements.add(element);
             element.init();
             element.update();
+            if (domElement.nodeType == Node.ELEMENT_NODE)
+                this.resizeObserver.observe(domElement);
         };
         element.entity.addEventListener("play", onLoaded, { once: true });
 
@@ -220,6 +230,7 @@ export default class Web2VR {
 
     removeElement(element) {
         // remove the element
+        this.resizeObserver.unobserve(element.domElement);
         this.aframe.container.removeChild(element.entity);
         this.elements.delete(element);
         // remove all the children of the element recursively
@@ -293,6 +304,6 @@ export default class Web2VR {
         const t2 = performance.now();
         // measure update performance
         if (this.settings.debug)
-            console.log("Update time: " + (t2 - t1) + ms);
+            console.log("Update time: " + (t2 - t1) + "ms");
     }
 }

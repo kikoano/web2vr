@@ -5763,7 +5763,24 @@ var Web2VR = /*#__PURE__*/function () {
 
     this.updating = false; // experimental only
 
-    this.html2canvasIDcounter = 0;
+    this.html2canvasIDcounter = 0; // calling element update if dom element has been resize
+    // cannot continue implementing ResizeObserver because it doesnt work on mobile devices when in VR like Oculus GO, Oculus Quest, Android phones...
+
+    this.resizeObserver = new ResizeObserver(function (entries) {
+      var _iterator = _createForOfIteratorHelper(entries),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var entry = _step.value;
+          console.log("entry", entry);
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+    });
   } // find all hover css rules and add {selector}hover class to them
 
 
@@ -5780,12 +5797,12 @@ var Web2VR = /*#__PURE__*/function () {
             if (rule instanceof CSSStyleRule) {
               var selectors = rule.selectorText.split(",");
 
-              var _iterator = _createForOfIteratorHelper(selectors),
-                  _step;
+              var _iterator2 = _createForOfIteratorHelper(selectors),
+                  _step2;
 
               try {
-                for (_iterator.s(); !(_step = _iterator.n()).done;) {
-                  var selector = _step.value;
+                for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+                  var selector = _step2.value;
                   var sel = selector.split(":"); // is hover
 
                   if (sel[1] == "hover") {
@@ -5795,9 +5812,9 @@ var Web2VR = /*#__PURE__*/function () {
                   }
                 }
               } catch (err) {
-                _iterator.e(err);
+                _iterator2.e(err);
               } finally {
-                _iterator.f();
+                _iterator2.f();
               }
             }
           }
@@ -5865,18 +5882,18 @@ var Web2VR = /*#__PURE__*/function () {
       var interval = setInterval(function () {
         var allLoaded = true;
 
-        var _iterator2 = _createForOfIteratorHelper(_this.elements),
-            _step2;
+        var _iterator3 = _createForOfIteratorHelper(_this.elements),
+            _step3;
 
         try {
-          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-            var element = _step2.value;
+          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+            var element = _step3.value;
             if (element instanceof _elements_imageElement__WEBPACK_IMPORTED_MODULE_14__["default"] && !element.loaded) allLoaded = false;
           }
         } catch (err) {
-          _iterator2.e(err);
+          _iterator3.e(err);
         } finally {
-          _iterator2.f();
+          _iterator3.f();
         }
 
         if (allLoaded) {
@@ -5889,6 +5906,8 @@ var Web2VR = /*#__PURE__*/function () {
   }, {
     key: "addElement",
     value: function addElement(domElement, parentElement, layer) {
+      var _this2 = this;
+
       // ignore tag if in ignoreTags list or text element(vr-span) is already added
       if (this.settings.ignoreTags.includes(domElement.tagName) || domElement.classList && domElement.classList.contains("vr-span")) return null;
       var element = null; // its text node and not empty
@@ -5921,6 +5940,7 @@ var Web2VR = /*#__PURE__*/function () {
         if (parentElement) parentElement.childElements.add(element);
         element.init();
         element.update();
+        if (domElement.nodeType == Node.ELEMENT_NODE) _this2.resizeObserver.observe(domElement);
       };
 
       element.entity.addEventListener("play", onLoaded, {
@@ -5932,21 +5952,22 @@ var Web2VR = /*#__PURE__*/function () {
     key: "removeElement",
     value: function removeElement(element) {
       // remove the element
+      this.resizeObserver.unobserve(element.domElement);
       this.aframe.container.removeChild(element.entity);
       this.elements["delete"](element); // remove all the children of the element recursively
 
-      var _iterator3 = _createForOfIteratorHelper(element.childElements),
-          _step3;
+      var _iterator4 = _createForOfIteratorHelper(element.childElements),
+          _step4;
 
       try {
-        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-          var child = _step3.value;
+        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+          var child = _step4.value;
           this.removeElement(child);
         }
       } catch (err) {
-        _iterator3.e(err);
+        _iterator4.e(err);
       } finally {
-        _iterator3.f();
+        _iterator4.f();
       }
     } // start at root and interate over child nodes recursively
 
@@ -5963,60 +5984,45 @@ var Web2VR = /*#__PURE__*/function () {
       if (currentNode.childNodes && currentNode.childNodes.length > 0) {
         layer++;
 
-        var _iterator4 = _createForOfIteratorHelper(currentNode.childNodes),
-            _step4;
+        var _iterator5 = _createForOfIteratorHelper(currentNode.childNodes),
+            _step5;
 
         try {
-          for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-            var child = _step4.value;
+          for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+            var child = _step5.value;
             this.addElementChildren(child, element, layer);
           }
         } catch (err) {
-          _iterator4.e(err);
+          _iterator5.e(err);
         } finally {
-          _iterator4.f();
+          _iterator5.f();
         }
       }
     }
   }, {
     key: "convertToVR",
     value: function convertToVR() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.addElementChildren(this.container); // observer dom element changes and for newly added and deleted dom elements
 
       this.observer = new MutationObserver(function (mutations) {
-        var _iterator5 = _createForOfIteratorHelper(mutations),
-            _step5;
+        var _iterator6 = _createForOfIteratorHelper(mutations),
+            _step6;
 
         try {
-          for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-            var mutation = _step5.value;
+          for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+            var mutation = _step6.value;
             var emptyRemove = false;
 
-            var _iterator6 = _createForOfIteratorHelper(mutation.removedNodes),
-                _step6;
-
-            try {
-              for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-                var node = _step6.value;
-                // not empty textNode
-                if (!(node.nodeType == Node.TEXT_NODE && !node.nodeValue.trim())) _this2.removeElement(node.element);else emptyRemove = true;
-              }
-            } catch (err) {
-              _iterator6.e(err);
-            } finally {
-              _iterator6.f();
-            }
-
-            var _iterator7 = _createForOfIteratorHelper(mutation.addedNodes),
+            var _iterator7 = _createForOfIteratorHelper(mutation.removedNodes),
                 _step7;
 
             try {
               for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-                var _node = _step7.value;
-
-                _this2.addElementChildren(_node, mutation.target.element, mutation.target.element.layer + 1);
+                var node = _step7.value;
+                // not empty textNode
+                if (!(node.nodeType == Node.TEXT_NODE && !node.nodeValue.trim())) _this3.removeElement(node.element);else emptyRemove = true;
               }
             } catch (err) {
               _iterator7.e(err);
@@ -6024,15 +6030,30 @@ var Web2VR = /*#__PURE__*/function () {
               _iterator7.f();
             }
 
+            var _iterator8 = _createForOfIteratorHelper(mutation.addedNodes),
+                _step8;
+
+            try {
+              for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+                var _node = _step8.value;
+
+                _this3.addElementChildren(_node, mutation.target.element, mutation.target.element.layer + 1);
+              }
+            } catch (err) {
+              _iterator8.e(err);
+            } finally {
+              _iterator8.f();
+            }
+
             if (!emptyRemove) {
               // when adding new nodes we also need to check for new loaded images
-              if (mutation.addedNodes.length > 0) _this2.allLoadedUpdate();else _this2.update();
+              if (mutation.addedNodes.length > 0) _this3.allLoadedUpdate();else _this3.update();
             }
           }
         } catch (err) {
-          _iterator5.e(err);
+          _iterator6.e(err);
         } finally {
-          _iterator5.f();
+          _iterator6.f();
         }
       });
       this.observer.observe(this.container, this.observerConfig);
@@ -6047,18 +6068,18 @@ var Web2VR = /*#__PURE__*/function () {
       if (this.updating) {
         // using try and catch because sometimes when element is removed it calls update after and it wont find element, the errors doesnt matter because the final result is the same
         try {
-          var _iterator8 = _createForOfIteratorHelper(this.elements),
-              _step8;
+          var _iterator9 = _createForOfIteratorHelper(this.elements),
+              _step9;
 
           try {
-            for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
-              var element = _step8.value;
+            for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
+              var element = _step9.value;
               element.update();
             }
           } catch (err) {
-            _iterator8.e(err);
+            _iterator9.e(err);
           } finally {
-            _iterator8.f();
+            _iterator9.f();
           }
         } catch (err) {
           console.error(err);
@@ -6070,7 +6091,7 @@ var Web2VR = /*#__PURE__*/function () {
 
       var t2 = performance.now(); // measure update performance
 
-      if (this.settings.debug) console.log("Update time: " + (t2 - t1) + ms);
+      if (this.settings.debug) console.log("Update time: " + (t2 - t1) + "ms");
     }
   }]);
 

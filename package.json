@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "description": "Dynamically translate HTML and CSS to A-Frame 3D world for virtual reality.",
   "main": "dist/web2vr.js",
-  "files":[
+  "files": [
     "dist",
     "src"
   ],
