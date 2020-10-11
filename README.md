@@ -108,6 +108,10 @@ Install and use directly by including the [browser files](https://github.com/kik
 
 </html>
 ```
+Result of the code:
+
+<img src="https://raw.githubusercontent.com/kikoano/web2vr/master/docs/images/simple demo.gif">
+
 Check tests and examples for more.
 #### npm
 Install via npm:
