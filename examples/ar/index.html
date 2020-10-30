@@ -293,7 +293,7 @@
         <a-entity camera></a-entity>
     </a-scene>
     <script>
-        const web2vr = new Web2VR("#html-container", { parentSelector: "#marker", scale: 550, scroll: false, skybox: false, createControllers: false, rotation: { x: -90 }, position: { x: 0.1, y: 0, z: -0.6 } });
+        const web2vr = new Web2VR("#html-container", { parentSelector: "#marker", scale: 550, scroll: false, skybox: false, createControllers: false, rotation: { x: -90 }, position: { x: -0.0001, y: 0, z: -0.6 } });
         web2vr.start();
         // There is bug from aframe when logarithmicDepthBuffer is enabled. It renders text behind(z position) other objects, one way to deal with this is to disable depthTest for the text component
         web2vr.aframe.scene.addEventListener("loaded", () => {
