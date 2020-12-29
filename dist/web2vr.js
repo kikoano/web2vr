@@ -2322,8 +2322,6 @@ var AframeContext = /*#__PURE__*/function () {
   }, {
     key: "createControllers",
     value: function createControllers() {
-      var _this2 = this;
-
       // cursor only for dev testing on desktop
       if (!document.getElementById("mouseCursor")) {
         var cursor = document.createElement("a-entity");
@@ -2353,42 +2351,41 @@ var AframeContext = /*#__PURE__*/function () {
         this.scene.appendChild(rightHand);
       } // keyboard
 
-
-      this.keyboard = document.getElementById("vr-keyboard");
-
+      /*this.keyboard = document.getElementById("vr-keyboard");
       if (!this.keyboard) {
-        this.keyboard = document.createElement("a-entity");
-        this.keyboard.id = "vr-keyboard";
-        this.keyboard.setAttribute("a-keyboard", "");
-        this.keyboard.setAttribute("grabbable", "");
-        this.scene.appendChild(this.keyboard);
-        this.keyboard.object3D.visible = false; // current active input
+          this.keyboard = document.createElement("a-entity");
+          this.keyboard.id = "vr-keyboard";
+          this.keyboard.setAttribute("a-keyboard", "");
+          this.keyboard.setAttribute("grabbable", "");
+          this.scene.appendChild(this.keyboard);
+          this.keyboard.object3D.visible = false;
+            // current active input
+          this.keyboard.activeInput = null;
+          // event listener for the keyboard key press 
+          document.addEventListener('a-keyboard-update', (e) => {
+              if (this.keyboard.activeInput) {
+                  const code = parseInt(e.detail.code);
+                  let value = this.keyboard.activeInput.value;
+                    // backspace
+                  if (code == 8)
+                      value = value.slice(0, -1);
+                  // submit or cancel
+                  else if (code == 6 || code == 24) {
+                      this.keyboard.object3D.visible = false;
+                      this.keyboard.object3D.position.y = 10000; // because raycasting still collides with invisible objects
+                      this.keyboard.activeInput.element.active = false;
+                      this.keyboard.activeInput.element.update();
+                      this.keyboard.activeInput = null;
+                      return;
+                  }
+                  else
+                      value += e.detail.value;
+                    this.keyboard.activeInput.value = value;
+                  this.keyboard.activeInput.element.update();
+              }
+          });
+      }*/
 
-        this.keyboard.activeInput = null; // event listener for the keyboard key press 
-
-        document.addEventListener('a-keyboard-update', function (e) {
-          if (_this2.keyboard.activeInput) {
-            var code = parseInt(e.detail.code);
-            var value = _this2.keyboard.activeInput.value; // backspace
-
-            if (code == 8) value = value.slice(0, -1); // submit or cancel
-            else if (code == 6 || code == 24) {
-                _this2.keyboard.object3D.visible = false;
-                _this2.keyboard.object3D.position.y = 10000; // because raycasting still collides with invisible objects
-
-                _this2.keyboard.activeInput.element.active = false;
-
-                _this2.keyboard.activeInput.element.update();
-
-                _this2.keyboard.activeInput = null;
-                return;
-              } else value += e.detail.value;
-            _this2.keyboard.activeInput.value = value;
-
-            _this2.keyboard.activeInput.element.update();
-          }
-        });
-      }
     }
   }]);
 
@@ -4104,9 +4101,10 @@ var TextElement = /*#__PURE__*/function (_ContainerElement) {
         this.clippingContext = clippingContext;
         var material = this.entity.components.text.material; // text component uses custom shader so default three.js clipping doesnt work, needed to inject clipping shader code inside the custom shader code(RawShaderMaterial)
         // help from https://stackoverflow.com/questions/42532545/add-clipping-to-three-shadermaterial
+        // 1.0.2 version changes: Because Aframe 1.1.0 changes text material shader to use webgl 2(glsl 3) some of the three.js ShaderChunk had to be converted to glsl 3.
 
-        var fragmentShader = "\n            #ifdef GL_OES_standard_derivatives\n            #extension GL_OES_standard_derivatives: enable\n            #endif\n            precision highp float;\n            uniform bool negate;\n            uniform float alphaTest;\n            uniform float opacity;\n            uniform sampler2D map;\n            uniform vec3 color;\n            varying vec2 vUV;\n            float median(float r, float g, float b) {\n                return max(min(r, g), min(max(r, g), b));\n            }\n            #define BIG_ENOUGH 0.001\n            #define MODIFIED_ALPHATEST (0.02 * isBigEnough / BIG_ENOUGH)\n\n            #include <clipping_planes_pars_fragment>\n\n            void main() {\n                #include <clipping_planes_fragment>\n                \n                vec3 sample = texture2D(map, vUV).rgb;\n                if (negate) { sample = 1.0 - sample; }\n                float sigDist = median(sample.r, sample.g, sample.b) - 0.5;\n                float alpha = clamp(sigDist / fwidth(sigDist) + 0.5, 0.0, 1.0);\n                float dscale = 0.353505;\n                vec2 duv = dscale * (dFdx(vUV) + dFdy(vUV));\n                float isBigEnough = max(abs(duv.x), abs(duv.y));\n                // Do modified alpha test.\n                if (isBigEnough > BIG_ENOUGH) {\n                    float ratio = BIG_ENOUGH / isBigEnough;\n                    alpha = ratio * alpha + (1.0 - ratio) * (sigDist + 0.5);\n                }\n                // Do modified alpha test.\n                if (alpha < alphaTest * MODIFIED_ALPHATEST) { discard; return; }\n                gl_FragColor = vec4(color.xyz, alpha * opacity);\n            }";
-        var vertexShader = "\n            #include <clipping_planes_pars_vertex>\n\n            attribute vec2 uv;\n            attribute vec3 position;\n            uniform mat4 projectionMatrix;\n            uniform mat4 modelViewMatrix;\n            varying vec2 vUV;\n            void main(void) {\n                #include <begin_vertex>\n                \n                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n                vUV = uv;\n            \n                #include <project_vertex>\n                #include <clipping_planes_vertex>\n            }";
+        var fragmentShader = "#version 300 es\n            precision highp float;\n            uniform bool negate;\n            uniform float alphaTest;\n            uniform float opacity;\n            uniform sampler2D map;\n            uniform vec3 color;\n            in vec2 vUV;\n            out vec4 fragColor;\n            float median(float r, float g, float b) {\n                return max(min(r, g), min(max(r, g), b));\n            }\n            #define BIG_ENOUGH 0.001\n            #define MODIFIED_ALPHATEST (0.02 * isBigEnough / BIG_ENOUGH)\n            \n            // clipping_planes_pars_fragment converted to glsl 3\n            #if NUM_CLIPPING_PLANES > 0\n                in vec3 vClipPosition;\n                uniform vec4 clippingPlanes[NUM_CLIPPING_PLANES];\n            #endif\n            \n            void main() {\n                // compatible with glsl 3\n                #include <clipping_planes_fragment>\n\n                vec3 sampleColor = texture(map, vUV).rgb;\n                if (negate) { sampleColor = 1.0 - sampleColor; }\n                float sigDist = median(sampleColor.r, sampleColor.g, sampleColor.b) - 0.5;\n                float alpha = clamp(sigDist / fwidth(sigDist) + 0.5, 0.0, 1.0);\n                float dscale = 0.353505;\n                vec2 duv = dscale * (dFdx(vUV) + dFdy(vUV));\n                float isBigEnough = max(abs(duv.x), abs(duv.y));\n                // Do modified alpha test.\n                if (isBigEnough > BIG_ENOUGH) {\n                    float ratio = BIG_ENOUGH / isBigEnough;\n                    alpha = ratio * alpha + (1.0 - ratio) * (sigDist + 0.5);\n                }\n                // Do modified alpha test.\n                if (alpha < alphaTest * MODIFIED_ALPHATEST) { discard; return; }\n                fragColor = vec4(color.xyz, alpha * opacity);\n            }";
+        var vertexShader = "#version 300 es\n            in vec2 uv;\n            in vec3 position;\n            uniform mat4 projectionMatrix;\n            uniform mat4 modelViewMatrix;\n            out vec2 vUV;\n\n            // clipping_planes_pars_vertex converted to glsl 3\n            #if NUM_CLIPPING_PLANES > 0\n\t            out vec3 vClipPosition;\n            #endif\n\n            void main(void) {\n                // compatible with glsl 3\n                #include <begin_vertex>\n\n                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n                vUV = uv;\n\n                // compatible with glsl 3\n                #include <project_vertex>\n                #include <clipping_planes_vertex>\n\n            }";
         material.fragmentShader = fragmentShader;
         material.vertexShader = vertexShader;
         material.clipping = true;

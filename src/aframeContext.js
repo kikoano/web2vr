@@ -110,7 +110,7 @@ export default class AframeContext {
             this.scene.appendChild(rightHand);
         }
         // keyboard
-        this.keyboard = document.getElementById("vr-keyboard");
+        /*this.keyboard = document.getElementById("vr-keyboard");
         if (!this.keyboard) {
             this.keyboard = document.createElement("a-entity");
             this.keyboard.id = "vr-keyboard";
@@ -146,6 +146,6 @@ export default class AframeContext {
                     this.keyboard.activeInput.element.update();
                 }
             });
-        }
+        }*/
     }
 }
