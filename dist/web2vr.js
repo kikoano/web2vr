@@ -4465,7 +4465,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         n = e.key && e.key.charCodeAt(0);
     var r = e.key,
         s = e.keyCode;
-    if ("vr" === t) s = parseInt(document.querySelector("#" + e.target.id).getAttribute("key-code")), r = document.querySelector("#" + e.target.id).getAttribute("value");else if (d.has(e.keyCode)) return;
+    if ("vr" === t) s = parseInt(document.querySelector("#".concat(e.target.id)).getAttribute("key-code")), r = document.querySelector("#".concat(e.target.id)).getAttribute("value");else if (d.has(e.keyCode)) return;
 
     switch (s) {
       case 9:
@@ -4531,10 +4531,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     }
 
     if ("vr" !== t) {
-      var _t = document.querySelector("#a-keyboard-button-" + n) || document.querySelector("#a-keyboard-button-" + e.keyCode);
+      var _t = document.querySelector("#a-keyboard-".concat(n)) || document.querySelector("#a-keyboard-".concat(e.keyCode));
 
-      _t && (_t.dispatchEvent(new Event("mouseenter")), _t.dispatchEvent(new Event("mousedown")), setTimeout(function () {
-        _t.dispatchEvent(new Event("mouseleave")), _t.dispatchEvent(new Event("mouseup"));
+      _t && (_t.dispatchEvent(new Event("mousedown")), setTimeout(function () {
+        _t.dispatchEvent(new Event("mouseleave"));
       }, 80));
     }
   };
@@ -4542,15 +4542,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   if ("undefined" == typeof AFRAME) throw new Error("Component attempted to register before AFRAME was available.");
   AFRAME.registerComponent("keyboard-button", {
     init: function init() {
+      var _this = this;
+
       var e = this.el;
       e.addEventListener("mousedown", function () {
         e.setAttribute("material", "opacity", "0.7");
       }), e.addEventListener("mouseup", function () {
-        e.setAttribute("material", "opacity", "0.9");
+        e.setAttribute("material", "opacity", _this.isMouseEnter ? "0.9" : "0");
       }), e.addEventListener("mouseenter", function () {
-        e.setAttribute("material", "color", e.getAttribute("highlightColor"));
+        e.setAttribute("material", "opacity", "0.9"), self.isMouseEnter = !0;
       }), e.addEventListener("mouseleave", function () {
-        e.setAttribute("material", "color", "#4a4a4a");
+        e.setAttribute("material", "opacity", "0"), self.isMouseEnter = !1;
       });
     }
   });
@@ -4582,9 +4584,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             n = document.createElement("a-entity");
         n.setAttribute("position", e.position);
         var r = document.createElement("a-entity");
-        r.setAttribute("geometry", "primitive: plane; width: ".concat(a, "; height: ").concat(d, ";")), this.keyTexture && this.keyTexture.length > 0 ? r.setAttribute("material", "src: " + this.keyTexture) : r.setAttribute("material", "color: #4a4a4a; opacity: 0.9");
+        r.setAttribute("geometry", "primitive: plane; width: ".concat(a, "; height: ").concat(d, ";")), this.keyTexture && this.keyTexture.length > 0 ? r.setAttribute("material", "src: ".concat(this.keyTexture)) : r.setAttribute("material", "color: #4a4a4a; opacity: 0.9");
         var s = document.createElement("a-text");
-        s.id = "a-keyboard-" + t.code, r.setAttribute("key-code", t.code), s.setAttribute("value", t.value), r.setAttribute("value", t.value), s.setAttribute("align", "center"), s.setAttribute("baseline", this.verticalAlign), s.setAttribute("position", "0 0 0.001"), s.setAttribute("width", this.fontSize), s.setAttribute("height", this.fontSize), s.setAttribute("geometry", "primitive: plane; width: ".concat(a, "; height: ").concat(d)), s.setAttribute("material", "opacity: 0.0; transparent: true; color: " + this.highlightColor), s.setAttribute("color", this.color), s.setAttribute("font", this.font), s.setAttribute("shader", "msdf"), s.setAttribute("negate", "false"), r.setAttribute("keyboard-button", !0), r.setAttribute("class", "collidable"), r.setAttribute("highlightColor", this.highlightColor), r.id = "a-keyboard-button-" + t.code, n.appendChild(r), n.appendChild(s), this.el.appendChild(n);
+        s.id = "a-keyboard-".concat(t.code), s.setAttribute("key-code", t.code), s.setAttribute("value", t.value), s.setAttribute("align", "center"), s.setAttribute("baseline", this.verticalAlign), s.setAttribute("position", "0 0 0.001"), s.setAttribute("width", this.fontSize), s.setAttribute("height", this.fontSize), s.setAttribute("geometry", "primitive: plane; width: ".concat(a, "; height: ").concat(d)), s.setAttribute("material", "opacity: 0.0; transparent: true; color: ".concat(this.highlightColor)), s.setAttribute("color", this.color), s.setAttribute("font", this.font), s.setAttribute("shader", "msdf"), s.setAttribute("negate", "false"), s.setAttribute("keyboard-button", !0), s.setAttribute("class", "collidable"), n.appendChild(r), n.appendChild(s), this.el.appendChild(n);
       }
     }, {
       key: "drawKeyboard",
@@ -4599,7 +4601,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               _a = .52,
               _d = .04 * _e.length + .004 * (_e.length - 1) + .04;
 
-          _t3.setAttribute("position", "".concat(_a / 2 - .02, " ").concat(-_d / 2 + .02, " -0.01")), _t3.setAttribute("geometry", "primitive: plane; width: ".concat(_a, "; height: ").concat(_d)), this.baseTexture && this.baseTexture.length > 0 ? _t3.setAttribute("material", "src: " + this.baseTexture) : _t3.setAttribute("material", "color: #4a4a4a; side: double; opacity: 0.7"), this.el.appendChild(_t3);
+          _t3.setAttribute("position", "".concat(_a / 2 - .02, " ").concat(-_d / 2 + .02, " -0.01")), _t3.setAttribute("geometry", "primitive: plane; width: ".concat(_a, "; height: ").concat(_d)), this.baseTexture && this.baseTexture.length > 0 ? _t3.setAttribute("material", "src: ".concat(this.baseTexture)) : _t3.setAttribute("material", "color: #4a4a4a; side: double; opacity: 0.7"), this.el.appendChild(_t3);
           var n = 0;
 
           for (var _t4 = 0; _t4 < _e.length; _t4++) {
@@ -4662,7 +4664,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
           case "space":
             return {
-              size: .2 + .016 + " 0.04 0",
+              size: "".concat(.2 + .016, " 0.04 0"),
               value: a,
               code: "32"
             };
