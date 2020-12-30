@@ -2322,6 +2322,8 @@ var AframeContext = /*#__PURE__*/function () {
   }, {
     key: "createControllers",
     value: function createControllers() {
+      var _this2 = this;
+
       // cursor only for dev testing on desktop
       if (!document.getElementById("mouseCursor")) {
         var cursor = document.createElement("a-entity");
@@ -2351,41 +2353,42 @@ var AframeContext = /*#__PURE__*/function () {
         this.scene.appendChild(rightHand);
       } // keyboard
 
-      /*this.keyboard = document.getElementById("vr-keyboard");
-      if (!this.keyboard) {
-          this.keyboard = document.createElement("a-entity");
-          this.keyboard.id = "vr-keyboard";
-          this.keyboard.setAttribute("a-keyboard", "");
-          this.keyboard.setAttribute("grabbable", "");
-          this.scene.appendChild(this.keyboard);
-          this.keyboard.object3D.visible = false;
-            // current active input
-          this.keyboard.activeInput = null;
-          // event listener for the keyboard key press 
-          document.addEventListener('a-keyboard-update', (e) => {
-              if (this.keyboard.activeInput) {
-                  const code = parseInt(e.detail.code);
-                  let value = this.keyboard.activeInput.value;
-                    // backspace
-                  if (code == 8)
-                      value = value.slice(0, -1);
-                  // submit or cancel
-                  else if (code == 6 || code == 24) {
-                      this.keyboard.object3D.visible = false;
-                      this.keyboard.object3D.position.y = 10000; // because raycasting still collides with invisible objects
-                      this.keyboard.activeInput.element.active = false;
-                      this.keyboard.activeInput.element.update();
-                      this.keyboard.activeInput = null;
-                      return;
-                  }
-                  else
-                      value += e.detail.value;
-                    this.keyboard.activeInput.value = value;
-                  this.keyboard.activeInput.element.update();
-              }
-          });
-      }*/
 
+      this.keyboard = document.getElementById("vr-keyboard");
+
+      if (!this.keyboard) {
+        this.keyboard = document.createElement("a-entity");
+        this.keyboard.id = "vr-keyboard";
+        this.keyboard.setAttribute("a-keyboard", "");
+        this.keyboard.setAttribute("grabbable", "");
+        this.scene.appendChild(this.keyboard);
+        this.keyboard.object3D.visible = false; // current active input
+
+        this.keyboard.activeInput = null; // event listener for the keyboard key press 
+
+        document.addEventListener('a-keyboard-update', function (e) {
+          if (_this2.keyboard.activeInput) {
+            var code = parseInt(e.detail.code);
+            var value = _this2.keyboard.activeInput.value; // backspace
+
+            if (code == 8) value = value.slice(0, -1); // submit or cancel
+            else if (code == 6 || code == 24) {
+                _this2.keyboard.object3D.visible = false;
+                _this2.keyboard.object3D.position.y = 10000; // because raycasting still collides with invisible objects
+
+                _this2.keyboard.activeInput.element.active = false;
+
+                _this2.keyboard.activeInput.element.update();
+
+                _this2.keyboard.activeInput = null;
+                return;
+              } else value += e.detail.value;
+            _this2.keyboard.activeInput.value = value;
+
+            _this2.keyboard.activeInput.element.update();
+          }
+        });
+      }
     }
   }]);
 
@@ -4101,7 +4104,7 @@ var TextElement = /*#__PURE__*/function (_ContainerElement) {
         this.clippingContext = clippingContext;
         var material = this.entity.components.text.material; // text component uses custom shader so default three.js clipping doesnt work, needed to inject clipping shader code inside the custom shader code(RawShaderMaterial)
         // help from https://stackoverflow.com/questions/42532545/add-clipping-to-three-shadermaterial
-        // 1.0.2 version changes: Because Aframe 1.1.0 changes text material shader to use webgl 2(glsl 3) some of the three.js ShaderChunk had to be converted to glsl 3.
+        // 1.1.0 version changes: Because Aframe 1.1.0 changes text material shader to use webgl 2(glsl 3) some of the three.js ShaderChunk had to be converted to glsl 3.
 
         var fragmentShader = "#version 300 es\n            precision highp float;\n            uniform bool negate;\n            uniform float alphaTest;\n            uniform float opacity;\n            uniform sampler2D map;\n            uniform vec3 color;\n            in vec2 vUV;\n            out vec4 fragColor;\n            float median(float r, float g, float b) {\n                return max(min(r, g), min(max(r, g), b));\n            }\n            #define BIG_ENOUGH 0.001\n            #define MODIFIED_ALPHATEST (0.02 * isBigEnough / BIG_ENOUGH)\n            \n            // clipping_planes_pars_fragment converted to glsl 3\n            #if NUM_CLIPPING_PLANES > 0\n                in vec3 vClipPosition;\n                uniform vec4 clippingPlanes[NUM_CLIPPING_PLANES];\n            #endif\n            \n            void main() {\n                // compatible with glsl 3\n                #include <clipping_planes_fragment>\n\n                vec3 sampleColor = texture(map, vUV).rgb;\n                if (negate) { sampleColor = 1.0 - sampleColor; }\n                float sigDist = median(sampleColor.r, sampleColor.g, sampleColor.b) - 0.5;\n                float alpha = clamp(sigDist / fwidth(sigDist) + 0.5, 0.0, 1.0);\n                float dscale = 0.353505;\n                vec2 duv = dscale * (dFdx(vUV) + dFdy(vUV));\n                float isBigEnough = max(abs(duv.x), abs(duv.y));\n                // Do modified alpha test.\n                if (isBigEnough > BIG_ENOUGH) {\n                    float ratio = BIG_ENOUGH / isBigEnough;\n                    alpha = ratio * alpha + (1.0 - ratio) * (sigDist + 0.5);\n                }\n                // Do modified alpha test.\n                if (alpha < alphaTest * MODIFIED_ALPHATEST) { discard; return; }\n                fragColor = vec4(color.xyz, alpha * opacity);\n            }";
         var vertexShader = "#version 300 es\n            in vec2 uv;\n            in vec3 position;\n            uniform mat4 projectionMatrix;\n            uniform mat4 modelViewMatrix;\n            out vec2 vUV;\n\n            // clipping_planes_pars_vertex converted to glsl 3\n            #if NUM_CLIPPING_PLANES > 0\n\t            out vec3 vClipPosition;\n            #endif\n\n            void main(void) {\n                // compatible with glsl 3\n                #include <begin_vertex>\n\n                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n                vUV = uv;\n\n                // compatible with glsl 3\n                #include <project_vertex>\n                #include <clipping_planes_vertex>\n\n            }";
@@ -4462,7 +4465,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         n = e.key && e.key.charCodeAt(0);
     var r = e.key,
         s = e.keyCode;
-    if ("vr" === t) s = parseInt(document.querySelector("#".concat(e.target.id)).getAttribute("key-code")), r = document.querySelector("#".concat(e.target.id)).getAttribute("value");else if (d.has(e.keyCode)) return;
+    if ("vr" === t) s = parseInt(document.querySelector("#" + e.target.id).getAttribute("key-code")), r = document.querySelector("#" + e.target.id).getAttribute("value");else if (d.has(e.keyCode)) return;
 
     switch (s) {
       case 9:
@@ -4528,10 +4531,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     }
 
     if ("vr" !== t) {
-      var _t = document.querySelector("#a-keyboard-".concat(n)) || document.querySelector("#a-keyboard-".concat(e.keyCode));
+      var _t = document.querySelector("#a-keyboard-button-" + n) || document.querySelector("#a-keyboard-button-" + e.keyCode);
 
-      _t && (_t.dispatchEvent(new Event("mousedown")), setTimeout(function () {
-        _t.dispatchEvent(new Event("mouseleave"));
+      _t && (_t.dispatchEvent(new Event("mouseenter")), _t.dispatchEvent(new Event("mousedown")), setTimeout(function () {
+        _t.dispatchEvent(new Event("mouseleave")), _t.dispatchEvent(new Event("mouseup"));
       }, 80));
     }
   };
@@ -4539,17 +4542,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   if ("undefined" == typeof AFRAME) throw new Error("Component attempted to register before AFRAME was available.");
   AFRAME.registerComponent("keyboard-button", {
     init: function init() {
-      var _this = this;
-
       var e = this.el;
       e.addEventListener("mousedown", function () {
         e.setAttribute("material", "opacity", "0.7");
       }), e.addEventListener("mouseup", function () {
-        e.setAttribute("material", "opacity", _this.isMouseEnter ? "0.9" : "0");
+        e.setAttribute("material", "opacity", "0.9");
       }), e.addEventListener("mouseenter", function () {
-        e.setAttribute("material", "opacity", "0.9"), self.isMouseEnter = !0;
+        e.setAttribute("material", "color", e.getAttribute("highlightColor"));
       }), e.addEventListener("mouseleave", function () {
-        e.setAttribute("material", "opacity", "0"), self.isMouseEnter = !1;
+        e.setAttribute("material", "color", "#4a4a4a");
       });
     }
   });
@@ -4581,9 +4582,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             n = document.createElement("a-entity");
         n.setAttribute("position", e.position);
         var r = document.createElement("a-entity");
-        r.setAttribute("geometry", "primitive: plane; width: ".concat(a, "; height: ").concat(d, ";")), this.keyTexture && this.keyTexture.length > 0 ? r.setAttribute("material", "src: ".concat(this.keyTexture)) : r.setAttribute("material", "color: #4a4a4a; opacity: 0.9");
+        r.setAttribute("geometry", "primitive: plane; width: ".concat(a, "; height: ").concat(d, ";")), this.keyTexture && this.keyTexture.length > 0 ? r.setAttribute("material", "src: " + this.keyTexture) : r.setAttribute("material", "color: #4a4a4a; opacity: 0.9");
         var s = document.createElement("a-text");
-        s.id = "a-keyboard-".concat(t.code), s.setAttribute("key-code", t.code), s.setAttribute("value", t.value), s.setAttribute("align", "center"), s.setAttribute("baseline", this.verticalAlign), s.setAttribute("position", "0 0 0.001"), s.setAttribute("width", this.fontSize), s.setAttribute("height", this.fontSize), s.setAttribute("geometry", "primitive: plane; width: ".concat(a, "; height: ").concat(d)), s.setAttribute("material", "opacity: 0.0; transparent: true; color: ".concat(this.highlightColor)), s.setAttribute("color", this.color), s.setAttribute("font", this.font), s.setAttribute("shader", "msdf"), s.setAttribute("negate", "false"), s.setAttribute("keyboard-button", !0), s.setAttribute("class", "collidable"), n.appendChild(r), n.appendChild(s), this.el.appendChild(n);
+        s.id = "a-keyboard-" + t.code, r.setAttribute("key-code", t.code), s.setAttribute("value", t.value), r.setAttribute("value", t.value), s.setAttribute("align", "center"), s.setAttribute("baseline", this.verticalAlign), s.setAttribute("position", "0 0 0.001"), s.setAttribute("width", this.fontSize), s.setAttribute("height", this.fontSize), s.setAttribute("geometry", "primitive: plane; width: ".concat(a, "; height: ").concat(d)), s.setAttribute("material", "opacity: 0.0; transparent: true; color: " + this.highlightColor), s.setAttribute("color", this.color), s.setAttribute("font", this.font), s.setAttribute("shader", "msdf"), s.setAttribute("negate", "false"), r.setAttribute("keyboard-button", !0), r.setAttribute("class", "collidable"), r.setAttribute("highlightColor", this.highlightColor), r.id = "a-keyboard-button-" + t.code, n.appendChild(r), n.appendChild(s), this.el.appendChild(n);
       }
     }, {
       key: "drawKeyboard",
@@ -4598,7 +4599,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               _a = .52,
               _d = .04 * _e.length + .004 * (_e.length - 1) + .04;
 
-          _t3.setAttribute("position", "".concat(_a / 2 - .02, " ").concat(-_d / 2 + .02, " -0.01")), _t3.setAttribute("geometry", "primitive: plane; width: ".concat(_a, "; height: ").concat(_d)), this.baseTexture && this.baseTexture.length > 0 ? _t3.setAttribute("material", "src: ".concat(this.baseTexture)) : _t3.setAttribute("material", "color: #4a4a4a; side: double; opacity: 0.7"), this.el.appendChild(_t3);
+          _t3.setAttribute("position", "".concat(_a / 2 - .02, " ").concat(-_d / 2 + .02, " -0.01")), _t3.setAttribute("geometry", "primitive: plane; width: ".concat(_a, "; height: ").concat(_d)), this.baseTexture && this.baseTexture.length > 0 ? _t3.setAttribute("material", "src: " + this.baseTexture) : _t3.setAttribute("material", "color: #4a4a4a; side: double; opacity: 0.7"), this.el.appendChild(_t3);
           var n = 0;
 
           for (var _t4 = 0; _t4 < _e.length; _t4++) {
@@ -4661,7 +4662,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
           case "space":
             return {
-              size: "".concat(.2 + .016, " 0.04 0"),
+              size: .2 + .016 + " 0.04 0",
               value: a,
               code: "32"
             };
