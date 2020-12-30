@@ -112,7 +112,7 @@ Result of the code:
 
 <img src="https://raw.githubusercontent.com/kikoano/web2vr/master/docs/images/simple demo.gif">
 
-See working code [source](https://glitch.com/edit/#!/deciduous-cooing-error?path=views%2Findex-aframe-1.0.4.html%3A14%3A9) and [live example](https://deciduous-cooing-error.glitch.me/old-aframe)
+See working code [source](https://glitch.com/edit/#!/deciduous-cooing-error?path=views%2Findex-aframe-master.html%3A7%3A71) and [live example](https://deciduous-cooing-error.glitch.me/master-aframe)
 Check tests and examples for more.
 #### npm
 Install via npm:
