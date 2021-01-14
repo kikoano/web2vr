@@ -153,7 +153,6 @@ For A-Frame 1.0.4 and older versions use Web2VR 1.0.1 version. Do not use A-Fram
 
 For now Web2VR 1.1.0 is only in developer version (dev branch) until A-Frame releases new version. The developer version is unstable and it uses [this](https://cdn.jsdelivr.net/gh/aframevr/aframe@1a5f2348ffe8647e65e0c14788f5ae2bf27ed0cc/dist/aframe-master.min.js) aframe master version. The 3 demo examples in the dev version have been updated to aframe master version.
 
-For now borders are disabled on mobile VR like Oculus Go and Oculus Quest.
 Everything has been tested on desktop VR. More simple examples also work on Oculus Go with fine performance. I dont have Oculus Quest so i cannot confirm if everything works there.
 ## A-Frame community components
 This library uses [Super hands](https://github.com/wmurphyrd/aframe-super-hands-component), [Super keyboard](https://github.com/supermedium/aframe-super-keyboard) and [GIF Shader](https://github.com/mayognaise/aframe-gif-shader) A-Frame community components.
