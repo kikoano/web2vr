@@ -2535,7 +2535,7 @@ AFRAME.registerComponent("vr-animate", {
 AFRAME.registerComponent("vr-border", {
   schema: {
     width: {
-      type: "int"
+      type: "number"
     },
     color: {
       type: "string"
@@ -2547,7 +2547,7 @@ AFRAME.registerComponent("vr-border", {
     var edges = new THREE.EdgesGeometry(plane.geometry);
     var line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({
       color: 0x000000,
-      linewidth: 10
+      linewidth: this.data.width
     }));
     this.borderObject = line;
     this.el.element.web2vr.aframe.container.object3D.add(this.borderObject); //maybe clippingContext inside tick?
@@ -2558,10 +2558,11 @@ AFRAME.registerComponent("vr-border", {
     }
   },
   update: function update() {
-    // waiting for three.js(WebGL) to add lineWidth support for not all lineWidth is 1
+    // waiting for three.js(WebGL) to add lineWidth support for Windows(DirectX) browsers for now linewidth is 1 no matter what you set it.
+    // lineWidth works for other OS.
     var borderWidth = this.data.width; // custom element border width
 
-    if (this.el.element.borderWidth) this.borderObject.material.lineWidth = this.el.element.borderWidth;else this.borderObject.material.lineWidth = borderWidth; // custom element border color
+    if (this.el.element.borderWidth) this.borderObject.material.linewidth = this.el.element.borderWidth;else this.borderObject.material.linewidth = borderWidth; // custom element border color
 
     if (this.el.element.borderColor) this.borderObject.material.color = this.el.element.borderColor;else this.borderObject.material.color = new THREE.Color(this.data.color);
   },
@@ -5753,9 +5754,7 @@ var Web2VR = /*#__PURE__*/function () {
       arrayMerge: function arrayMerge(destination, source) {
         return [].concat(_toConsumableArray(destination), _toConsumableArray(source));
       }
-    }); // disable borders if its mobile because LineBasicMaterial doesnt work well on mobile
-
-    if (AFRAME.utils.device.isMobile() || AFRAME.utils.device.isOculusBrowser()) this.settings.border = false; // aframe context
+    }); // aframe context
 
     this.aframe = new _aframeContext__WEBPACK_IMPORTED_MODULE_11__["default"](this.settings); // vr elements
 
