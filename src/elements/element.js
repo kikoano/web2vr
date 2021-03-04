@@ -185,10 +185,11 @@ export default class Element {
                 if ((!this.domElement.classList.contains("vr-span") && (this.mouseEventHandle.listeningForMouseEvents || (this.domElement.tagName == "INPUT" && this.domElement.type == "text")) || this.domElement == this.web2vr.container))
                     this.entity.classList.add(this.web2vr.settings.interactiveTag);
             }
-            if (this.style.transform == "none") {
-                this.entity.setAttribute("width", this.position.width);
-                this.entity.setAttribute("height", this.position.height);
-            }
+            // if you enable this it wont be able to update size on transform images
+            //if (this.style.transform == "none") {
+            this.entity.setAttribute("width", this.position.width);
+            this.entity.setAttribute("height", this.position.height);
+            //}
 
             this.checkAnimation();
 
