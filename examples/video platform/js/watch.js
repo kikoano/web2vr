@@ -51,9 +51,9 @@ document.getElementById("daynight").onclick = (e) => {
     const environment = document.getElementById("environment");
     const lightPosition = environment.getAttribute("environment").lightPosition;
     if (lightPosition.x == DAY)
-        environment.setAttribute("environment", "lightPosition", `${NIGHT} ${lightPosition.y} ${lightPosition.z}`);
+        environment.setAttribute("environment", "lightPosition", { x: NIGHT, y: lightPosition.y, z: lightPosition.z });
     else
-        environment.setAttribute("environment", "lightPosition", `${DAY} ${lightPosition.y} ${lightPosition.z}`);
+        environment.setAttribute("environment", "lightPosition", { x: DAY, y: lightPosition.y, z: lightPosition.z });
 }
 
 // set current volume
