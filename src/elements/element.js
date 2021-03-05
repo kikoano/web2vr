@@ -258,8 +258,8 @@ export default class Element {
                 const elements = matrix.elements;
                 const scaleX = Math.sqrt(elements[0] * elements[0] + elements[1] * elements[1]);
                 const scaleY = Math.sqrt(elements[5] * elements[5] + elements[4] * elements[4]);
-                // for radio scale is 2 times smaller because its circle
-                if (this.domElement.tagName == "INPUT" && this.domElement.type == "radio")
+                // for radio scale is 2 times smaller because its circle, for some rason checkbox scale needs to be in half else its too big
+                if (this.domElement.tagName == "INPUT" && (this.domElement.type == "radio" || this.domElement.type == "checkbox"))
                     this.entity.object3D.scale.set(scaleX / 2, scaleY / 2, 1);
                 else
                     this.entity.object3D.scale.set(scaleX, scaleY, 1);
