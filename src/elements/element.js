@@ -188,7 +188,7 @@ export default class Element {
             }
 
             // if there is transform then width and height will be set with the transform matrix scale
-
+            // using needsStartingTransformSize so width and height are never 0 when doing transform scale
             if (this.style.transform == "none" || this.needsStartingTransformSize) {
                 this.entity.setAttribute("width", this.position.width);
                 this.entity.setAttribute("height", this.position.height);
