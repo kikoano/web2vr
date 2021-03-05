@@ -16,6 +16,7 @@ export default class Element {
         this.position = new Position(this.domElement.getBoundingClientRect(), layer * this.web2vr.settings.layerStep, web2vr.settings.scale);
         this.style = window.getComputedStyle(this.domElement);
         this.parentTransform = "none";
+        this.needsStartingTransformSize = true;
     }
 
     // call after entity is created in inheriting class
@@ -185,11 +186,13 @@ export default class Element {
                 if ((!this.domElement.classList.contains("vr-span") && (this.mouseEventHandle.listeningForMouseEvents || (this.domElement.tagName == "INPUT" && this.domElement.type == "text")) || this.domElement == this.web2vr.container))
                     this.entity.classList.add(this.web2vr.settings.interactiveTag);
             }
-            // if you enable this it wont be able to update size on transform images
-            //if (this.style.transform == "none") {
-            this.entity.setAttribute("width", this.position.width);
-            this.entity.setAttribute("height", this.position.height);
-            //}
+
+            // if there is transform then width and height will be set with the transform matrix scale
+
+            if (this.style.transform == "none" || this.needsStartingTransformSize) {
+                this.entity.setAttribute("width", this.position.width);
+                this.entity.setAttribute("height", this.position.height);
+            }
 
             this.checkAnimation();
 
@@ -217,6 +220,7 @@ export default class Element {
         }
 
         if (transform != "none") {
+            this.needsStartingTransformSize = false;
             const matrixType = transform.split('(')[0];
             // get matrix values in float
             let values = transform.split('(')[1];
