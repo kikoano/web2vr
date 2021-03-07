@@ -2382,7 +2382,8 @@ var AframeContext = /*#__PURE__*/function () {
 
                 _this2.keyboard.activeInput = null;
                 return;
-              } else value += e.detail.value;
+              } // ignore arrow keys
+              else if (![37, 38, 39, 40].includes(code)) value += e.detail.value;
             _this2.keyboard.activeInput.value = value;
 
             _this2.keyboard.activeInput.element.update();
