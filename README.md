@@ -150,7 +150,9 @@ This is the list of the available parameters.
 | **border**| true | Enable CSS border support. For now all borders width is 1 due to limitations of WebGL line width. |
 ## Compatibility
 For A-Frame 1.2.0 and newer versions use Web2VR 1.1.1 or newer version.
+
 For A-Frame 1.0.4 and older versions use Web2VR 1.0.1 version.
+
 Do not use A-Frame version 1.1.0 it breaks Web2VR code.
 
 Everything has been tested on desktop VR. More simple examples also work on Oculus Go with fine performance. I dont have Oculus Quest so i cannot confirm if everything works there.
