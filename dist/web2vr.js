@@ -2445,6 +2445,14 @@ var AssetManager = /*#__PURE__*/function () {
       }
 
       this.assets.setAttribute("current-id", currentAssetId + 1);
+    } // update current-id attribute and return it.
+    // used for elements (ex. video) outside a-assets tag
+
+  }, {
+    key: "updateCurrentAssetIdReturn",
+    value: function updateCurrentAssetIdReturn() {
+      this.updateCurrentAssetId();
+      return "asset-" + this.assets.getAttribute("current-id");
     } // find asset if exists if not create and return it
 
   }, {
@@ -3755,7 +3763,8 @@ var ImageElement = /*#__PURE__*/function (_Element) {
   }]);
 
   return ImageElement;
-}(_element__WEBPACK_IMPORTED_MODULE_0__["default"]);
+}(_element__WEBPACK_IMPORTED_MODULE_0__["default"]); // TODO: No need to save image copy in assets you can directly read it from the orignal
+
 
 
 
@@ -4201,10 +4210,6 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -4239,8 +4244,6 @@ var VideoElement = /*#__PURE__*/function (_Element) {
 
     _this.web2vr.aframe.scene.appendChild(_this.video360);
 
-    _this.current360Src = null;
-
     _this.createClickEvent();
 
     _this.domElement.addEventListener("play", function () {
@@ -4249,31 +4252,12 @@ var VideoElement = /*#__PURE__*/function (_Element) {
 
     _this.domElement.addEventListener("pause", function () {
       if (_this.domElement.hasAttribute("vr")) _this.video360.components.material.material.map.image.pause();
-    }); // update elements when video loaded
-
-
-    _this.domElement.addEventListener("loadeddata", function () {
-      _this.web2vr.update();
     });
 
     return _this;
   }
 
   _createClass(VideoElement, [{
-    key: "init",
-    value: function init() {
-      // this is async dynamic so no need to put in update
-      var texture = new THREE.VideoTexture(this.domElement);
-      texture.minFilter = THREE.LinearFilter;
-      texture.magFilter = THREE.LinearFilter;
-      texture.format = THREE.RGBAFormat;
-      this.entity.object3D.children[0].material = new THREE.MeshBasicMaterial({
-        map: texture
-      });
-
-      _get(_getPrototypeOf(VideoElement.prototype), "init", this).call(this);
-    }
-  }, {
     key: "createClickEvent",
     value: function createClickEvent() {
       var _this2 = this;
@@ -4281,43 +4265,34 @@ var VideoElement = /*#__PURE__*/function (_Element) {
       // for normal video
       this.domElement.addEventListener("click", function () {
         _this2.domElement.paused ? _this2.domElement.play() : _this2.domElement.pause();
-      }); // for 360 video
-
-      /*this.video360.addEventListener("click", () => {
-          if (this.domElement.paused) {
-              this.domElement.play();
-              this.video360.components.material.material.map.image.play();
-          }
-          else {
-              this.domElement.pause();
-              this.video360.components.material.material.map.image.pause();
-          }
-      });**/
+      });
     }
   }, {
     key: "specificUpdate",
     value: function specificUpdate() {
+      var src = this.domElement.currentSrc;
+      var id = this.domElement.id; // if there is no video id generate new id
+
+      if (!id) {
+        id = this.web2vr.aframe.assetManager.updateCurrentAssetIdReturn();
+        this.domElement.id = id;
+      }
+
       if (this.domElement.hasAttribute("vr")) {
         this.video360.object3D.visible = true;
         this.video360.classList.add(this.web2vr.settings.interactiveTag);
         this.entity.object3D.visible = false;
         this.entity.classList.remove(this.web2vr.settings.interactiveTag);
-        var src = this.domElement.firstElementChild.src;
+        this.video360.setAttribute("src", "#" + id); // set video360 rotation
 
-        if (this.current360Src != src) {
-          var assetID = this.web2vr.aframe.assetManager.getAsset(src, "video");
-          this.video360.setAttribute("src", "#" + assetID); // set video360 rotation
-
-          var rotation = this.domElement.getAttribute("vr");
-          if (rotation) this.video360.object3D.rotation.y = THREE.Math.degToRad(rotation);else this.video360.object3D.rotation.y = 0; // no need for audio because we have it from the html where we control it
-
-          if (this.video360.components.material.material.map) this.video360.components.material.material.map.image.muted = true;
-        }
+        var rotation = this.domElement.getAttribute("vr");
+        if (rotation) this.video360.object3D.rotation.y = THREE.Math.degToRad(rotation);else this.video360.object3D.rotation.y = 0;
       } else {
         this.video360.object3D.visible = false;
         this.video360.classList.remove(this.web2vr.settings.interactiveTag);
         this.entity.object3D.visible = true;
         this.entity.classList.add(this.web2vr.settings.interactiveTag);
+        this.entity.setAttribute("src", "#" + id);
       }
     }
   }]);

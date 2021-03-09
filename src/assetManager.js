@@ -18,6 +18,12 @@ export default class AssetManager {
         }
         this.assets.setAttribute("current-id", currentAssetId + 1);
     }
+    // update current-id attribute and return it.
+    // used for elements (ex. video) outside a-assets tag
+    updateCurrentAssetIdReturn(){
+        this.updateCurrentAssetId();
+        return "asset-"+this.assets.getAttribute("current-id");
+    }
 
     // find asset if exists if not create and return it
     getAsset(path, type) {
