@@ -228,6 +228,7 @@ const playVideo = (id) => {
         document.getElementById("video").style.width = "1px"; // no need to render html video because it will reduce performance
         document.getElementById("video").setAttribute("vr", video.vrRotate);
         document.getElementById("environment").setAttribute("environment", "active", false);
+        document.getElementById("environment").setAttribute('visible',false);
         document.querySelectorAll("a-sky")[1].object3D.visible = false; // never needed in the first place
 
         // enable 360 lighting
@@ -238,6 +239,7 @@ const playVideo = (id) => {
         document.getElementById("video").style.width = VIDEO_WIDTH;
         document.getElementById("video").removeAttribute("vr");
         document.getElementById("environment").setAttribute("environment", "active", true);
+        document.getElementById("environment").setAttribute('visible',true);
 
         // disable 360 lighting
         for (const light of document.querySelectorAll(".light360"))

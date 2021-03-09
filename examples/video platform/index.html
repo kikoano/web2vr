@@ -113,7 +113,7 @@
         </div>
     </div>
 
-    <video id="video" control>
+    <video id="video" controls>
         <source src="/tests/assets/timeScapes.mp4" type="video/mp4">
     </video>
 
@@ -145,7 +145,7 @@
         </a-assets>
         <a-entity class="light360" light="" position="0 2 0" visible=false></a-entity>
         <a-entity class="light360" light="intensity: 0.3; type: ambient" visible=false></a-entity>
-        <a-entity id="environment">
+        <a-entity id="environment"></a-entity>
         </a-entity>
         <a-entity id="watchEntity" position="0.015 0.03 0.148" scale="0.2 0.2 0.2" rotation="255 -20.71 32"
             gltf-model="#watchModel" shadow></a-entity>
@@ -172,11 +172,7 @@
         }
 
         const scene = document.querySelector('a-scene');
-        if (scene.hasLoaded) {
-            initEnvironment();
-        } else {
-            scene.addEventListener('loaded', initEnvironment);
-        }
+        scene.addEventListener('loaded', initEnvironment);
 
         const searchbarVR = new Web2VR("#searchbar", { position: { x: -0.832, y: 2.38, z: -1.6 } });
         searchbarVR.start();
