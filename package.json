@@ -11,16 +11,16 @@
     "aframe-gif-shader": "^0.9.1",
     "aframe-super-keyboard": "^2.1.0",
     "deepmerge": "^4.2.2",
-    "super-hands": "^3.0.1"
+    "super-hands": "^3.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.10",
-    "@babel/plugin-proposal-class-properties": "^7.12.1",
-    "@babel/plugin-proposal-private-methods": "^7.12.1",
-    "@babel/preset-env": "^7.12.11",
-    "aframe": "^1.1.0",
+    "@babel/core": "^7.13.10",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-proposal-private-methods": "^7.13.0",
+    "@babel/preset-env": "^7.13.10",
+    "aframe": "^1.2.0",
     "babel-loader": "^8.2.2",
-    "webpack": "^4.44.2",
+    "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12",
     "webpack-merge": "^4.2.2"
   },
