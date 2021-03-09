@@ -113,7 +113,7 @@ Result of the code:
 
 <img src="https://raw.githubusercontent.com/kikoano/web2vr/master/docs/images/simple demo.gif">
 
-Glitch [link](https://glitch.com/edit/#!/leaf-serious-blade) of the code.
+See working code [source](https://glitch.com/edit/#!/leaf-serious-blade) and [live example](https://leaf-serious-blade.glitch.me).
 
 Check tests and examples for more.
 #### npm
