@@ -48,6 +48,7 @@ Room 3D model with lots of bootstrap examples placed everywhere. Examples are ta
 This is full working web app of video platform that is entirely written with HTML, CSS and JS then translated to web2vr elements.
 Entire web app has dynamic elements to show that Web2VR works with dynamic elements.
 If the user is viewing in Non-VR then the watch will be shown in the top left corner of the window.
+If you click 360 video as your first video to watch it wont load because of aframe-environment-component bugs.
 ### Tests
 
 [DEMO](https://kikoano.github.io/web2vr/tests)
@@ -79,8 +80,8 @@ Install and use directly by including the [browser files](https://github.com/kik
 <html>
 
 <head>
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/web2vr@1.0.0/dist/web2vr.min.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web2vr@1.1.1/dist/web2vr.min.js"></script>
     <style>
         #html-container{
             position: absolute;
@@ -155,7 +156,7 @@ For A-Frame 1.0.4 and older versions use Web2VR 1.0.1 version.
 
 Do not use A-Frame version 1.1.0 it breaks Web2VR code.
 
-Everything has been tested on desktop VR. More simple examples also work on Oculus Go with fine performance. I dont have Oculus Quest so i cannot confirm if everything works there.
+Everything has been tested on desktop VR. Desktop Chrome version 89.0.4389.82 and Firefox version 86.0 have been used for testing. I dont have Oculus Quest so i cannot confirm if everything works there.
 ## A-Frame community components
 This library uses [Super hands](https://github.com/wmurphyrd/aframe-super-hands-component), [Super keyboard](https://github.com/supermedium/aframe-super-keyboard) and [GIF Shader](https://github.com/mayognaise/aframe-gif-shader) A-Frame community components.
 ## License
