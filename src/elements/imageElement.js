@@ -46,3 +46,5 @@ export default class ImageElement extends Element {
         }
     }
 }
+
+// TODO: No need to save image copy in assets you can directly read it from the orignal

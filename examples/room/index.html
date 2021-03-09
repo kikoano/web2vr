@@ -3,7 +3,7 @@
 
 <head>
     <title>Room</title>
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="../../dist/web2vr.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -39,7 +39,7 @@
 </head>
 
 <body>
-    <video id="video" control>
+    <video id="video" controls>
         <source src="../../tests/assets/timeScapes.mp4" type="video/mp4">
     </video>
     <div id="contact-form">
@@ -556,7 +556,7 @@
 
     <a-scene renderer="colorManagement:true;" shadow="type: pcfsoft">
         <a-assets>
-            <a-asset-item id="room" src="./assets/room.glb"></a-asset-item>
+            <a-asset-item id="room" src="./assets/room no specular.glb"></a-asset-item>
         </a-assets>
 
         <a-entity position="0.2 0 0" scale="0.1 0.1 0.1" rotation="0 180 0" gltf-model="#room" shadow></a-entity>

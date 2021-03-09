@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tests</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="../../dist/web2vr.js"></script>
+    <script src="../embedScene.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <div id="html-container">
+        <video controls width="730">
+            <source src="../assets/timeScapes.mp4" type="video/mp4">
+        </video>
+        <img src="../assets/rifts.png" width="200">
+        <video src="../../examples/video platform/videos/A Space Journey (HD).mp4" id="video" controls width="730">
+        </video>
+    </div>
+    <div id="aframe-container">
+        <a-scene embedded>
+
+        </a-scene>
+    </div>
+    <script>
+        const web2vr = new Web2VR(document.getElementById("html-container"), { debug: true });
+        web2vr.start();
+    </script>
+</body>
+
+</html>

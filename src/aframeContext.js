@@ -139,7 +139,8 @@ export default class AframeContext {
                         this.keyboard.activeInput = null;
                         return;
                     }
-                    else
+                    // ignore arrow keys
+                    else if (![37, 38, 39, 40].includes(code))
                         value += e.detail.value;
 
                     this.keyboard.activeInput.value = value;

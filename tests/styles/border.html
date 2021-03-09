@@ -3,22 +3,27 @@
 
 <head>
     <title>Tests</title>
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="../../dist/web2vr.js"></script>
     <script src="../embedScene.js"></script>
     <link rel="stylesheet" type="text/css" href="../style.css">
     <style>
         img {
             border-style: solid;
-            border-width: 4px;
+            border-width: 2px;
             border-color: blue;
         }
 
         p {
             color: green;
             border-style: solid;
-            border-width: 8px;
+            border-width: 5px;
             border-color: white;
+        }
+        .border1{
+            border-style: solid;
+            border-width: 1px;
+            border-color: black;
         }
     </style>
 </head>
@@ -27,6 +32,7 @@
     <div id="html-container">
         <img src="../assets/rifts.png" alt="">
         <p>Text inside white border!</p>
+        <p class="border1">Text with border 1px</p>
         <input type="text">
         <button id="change">Change</button>
     </div>
@@ -38,9 +44,9 @@
     <script>
         const change = document.getElementById("change");
         change.onclick = () => {
-            document.querySelectorAll("#html-container *").forEach(e => {
+            document.querySelectorAll("#html-container p").forEach(e => {
                 e.style.borderColor = "black";
-                e.style.borderWidth = "8px";
+                e.style.borderWidth = "6px";
             })
         }
 

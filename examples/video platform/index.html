@@ -3,9 +3,9 @@
 
 <head>
     <title>Video platform</title>
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script
-        src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+        src="https://unpkg.com/aframe-environment-component@1.2.0/dist/aframe-environment-component.min.js"></script>
     <script src="../../dist/web2vr.min.js"></script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -113,7 +113,7 @@
         </div>
     </div>
 
-    <video id="video" control>
+    <video id="video" controls>
         <source src="/tests/assets/timeScapes.mp4" type="video/mp4">
     </video>
 
@@ -145,14 +145,35 @@
         </a-assets>
         <a-entity class="light360" light="" position="0 2 0" visible=false></a-entity>
         <a-entity class="light360" light="intensity: 0.3; type: ambient" visible=false></a-entity>
-        <a-entity id="environment"
-            environment="dressing: cubes; dressingScale: 6; dressingAmount:20; dressingVariance: '0 40 0'; dressingColor: #484848; seed: 5; ground: canyon; groundColor: #a87d6f; groundColor2: #795449; groundTexture: walkernoise; groundYScale: 20; lightPosition: 5 10 0.33; shadow: true; shadowSize: 1;">
+        <a-entity id="environment"></a-entity>
         </a-entity>
         <a-entity id="watchEntity" position="0.015 0.03 0.148" scale="0.2 0.2 0.2" rotation="255 -20.71 32"
             gltf-model="#watchModel" shadow></a-entity>
     </a-scene>
 
     <script>
+        const initEnvironment = () => {
+            document.getElementById("environment").setAttribute("environment", {
+                dressingScale: 6,
+                lightPosition: { x: 5, y: 10, z: 0.33 },
+                dressing: "cubes",
+                dressingAmount: 20,
+                dressingVariance: { x: 0, y: 40, z: 0 },
+                dressingColor: "#484848",
+                seed: 5,
+                ground: "canyon",
+                groundColor: "#a87d6f",
+                groundColor2: "#795449",
+                groundTexture: "walkernoise",
+                groundYScale: 20,
+                shadow: true,
+                shadowSize: 1
+            });
+        }
+
+        const scene = document.querySelector('a-scene');
+        scene.addEventListener('loaded', initEnvironment);
+
         const searchbarVR = new Web2VR("#searchbar", { position: { x: -0.832, y: 2.38, z: -1.6 } });
         searchbarVR.start();
 

@@ -35,9 +35,6 @@ export default class Web2VR {
                 return [...destination, ...source];
             }
         });
-        // disable borders if its mobile because LineBasicMaterial doesnt work well on mobile
-        if (AFRAME.utils.device.isMobile() || AFRAME.utils.device.isOculusBrowser())
-            this.settings.border = false;
 
         // aframe context
         this.aframe = new AframeContext(this.settings);

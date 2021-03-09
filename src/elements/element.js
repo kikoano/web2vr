@@ -16,6 +16,7 @@ export default class Element {
         this.position = new Position(this.domElement.getBoundingClientRect(), layer * this.web2vr.settings.layerStep, web2vr.settings.scale);
         this.style = window.getComputedStyle(this.domElement);
         this.parentTransform = "none";
+        this.needsStartingTransformSize = true;
     }
 
     // call after entity is created in inheriting class
@@ -185,7 +186,10 @@ export default class Element {
                 if ((!this.domElement.classList.contains("vr-span") && (this.mouseEventHandle.listeningForMouseEvents || (this.domElement.tagName == "INPUT" && this.domElement.type == "text")) || this.domElement == this.web2vr.container))
                     this.entity.classList.add(this.web2vr.settings.interactiveTag);
             }
-            if (this.style.transform == "none") {
+
+            // if there is transform then width and height will be set with the transform matrix scale
+            // using needsStartingTransformSize so width and height are never 0 when doing transform scale
+            if (this.style.transform == "none" || this.needsStartingTransformSize) {
                 this.entity.setAttribute("width", this.position.width);
                 this.entity.setAttribute("height", this.position.height);
             }
@@ -216,6 +220,7 @@ export default class Element {
         }
 
         if (transform != "none") {
+            this.needsStartingTransformSize = false;
             const matrixType = transform.split('(')[0];
             // get matrix values in float
             let values = transform.split('(')[1];
@@ -253,8 +258,8 @@ export default class Element {
                 const elements = matrix.elements;
                 const scaleX = Math.sqrt(elements[0] * elements[0] + elements[1] * elements[1]);
                 const scaleY = Math.sqrt(elements[5] * elements[5] + elements[4] * elements[4]);
-                // for radio scale is 2 times smaller because its circle
-                if (this.domElement.tagName == "INPUT" && this.domElement.type == "radio")
+                // for radio scale is 2 times smaller because its circle, for some rason checkbox scale needs to be in half else its too big
+                if (this.domElement.tagName == "INPUT" && (this.domElement.type == "radio" || this.domElement.type == "checkbox"))
                     this.entity.object3D.scale.set(scaleX / 2, scaleY / 2, 1);
                 else
                     this.entity.object3D.scale.set(scaleX, scaleY, 1);
