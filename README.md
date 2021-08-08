@@ -158,7 +158,8 @@ For A-Frame 1.0.4 and older versions use Web2VR 1.0.1 version.
 
 Do not use A-Frame version 1.1.0 it breaks Web2VR code.
 
-Everything has been tested on desktop VR. Desktop Chrome version 89.0.4389.82 and Firefox version 86.0 have been used for testing. I dont have Oculus Quest so i cannot confirm if everything works there.
+Everything has been tested on desktop VR. Desktop Chrome version 89.0.4389.82 and Firefox version 86.0 have been used for testing. Reported to work in Oculus Quest 2, as well.
+
 ## A-Frame community components
 This library uses [Super hands](https://github.com/wmurphyrd/aframe-super-hands-component), [Super keyboard](https://github.com/supermedium/aframe-super-keyboard) and [GIF Shader](https://github.com/mayognaise/aframe-gif-shader) A-Frame community components.
 ## License
