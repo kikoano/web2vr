@@ -34,7 +34,7 @@ export default class VideoElement extends Element {
         let id = this.domElement.id;
 
         // if there is no video id generate new id
-        if(!id){
+        if (!id) {
             id = this.web2vr.aframe.assetManager.updateCurrentAssetIdReturn();
             this.domElement.id = id;
         }
@@ -49,7 +49,7 @@ export default class VideoElement extends Element {
             // set video360 rotation
             const rotation = this.domElement.getAttribute("vr");
             if (rotation)
-                this.video360.object3D.rotation.y = THREE.Math.degToRad(rotation);
+                this.video360.object3D.rotation.y = THREE.MathUtils.degToRad(rotation);
             else
                 this.video360.object3D.rotation.y = 0;
         }

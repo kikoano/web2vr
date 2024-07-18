@@ -17,13 +17,13 @@ export default class InputElement extends TextElement {
             keyboard.position.copy(camera.position);
             keyboard.rotation.copy(camera.rotation);
             keyboard.rotation.z = 0;
-            keyboard.rotation.x = THREE.Math.degToRad(-30);
+            keyboard.rotation.x = THREE.MathUtils.degToRad(-30);
             keyboard.translateX(-0.24);
             keyboard.translateY(-0.1);
             keyboard.translateZ(-0.6);
             keyboard.visible = true;
 
-            if (this.web2vr.aframe.keyboard.activeInput){
+            if (this.web2vr.aframe.keyboard.activeInput) {
                 this.web2vr.aframe.keyboard.activeInput.element.active = false;
                 // update web2vr where activeInput is located
                 this.web2vr.aframe.keyboard.activeInput.element.web2vr.update();

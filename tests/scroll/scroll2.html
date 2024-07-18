@@ -3,7 +3,7 @@
 
 <head>
     <title>Tests</title>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="../../dist/web2vr.js"></script>
     <script src="../embedScene.js"></script>
     <link rel="stylesheet" type="text/css" href="../style.css">
@@ -12,7 +12,8 @@
             height: 600px;
             overflow: scroll;
         }
-        p{
+
+        p {
             background-color: #8ab71b;
         }
     </style>
@@ -146,7 +147,7 @@
         </a-scene>
     </div>
     <script>
-        const web2vr = new Web2VR(document.getElementById("html-container"), { debug: true, showClipping: true});
+        const web2vr = new Web2VR(document.getElementById("html-container"), { debug: true, showClipping: true });
         web2vr.start();
     </script>
 </body>

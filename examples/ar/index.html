@@ -6,7 +6,7 @@
     <title>AR</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="../../dist/web2vr.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -287,7 +287,8 @@
             </div>
         </div>
     </div>
-    <a-scene renderer="antialias: true; logarithmicDepthBuffer: true" embedded arjs="sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960;">
+    <a-scene renderer="antialias: true; logarithmicDepthBuffer: true" embedded
+        arjs="sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960;">
         <a-marker id="marker" preset="hiro">
         </a-marker>
         <a-entity camera></a-entity>

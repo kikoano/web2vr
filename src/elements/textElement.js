@@ -19,7 +19,7 @@ export default class TextElement extends ContainerElement {
             // text component uses custom shader so default three.js clipping doesnt work, needed to inject clipping shader code inside the custom shader code(RawShaderMaterial)
             // help from https://stackoverflow.com/questions/42532545/add-clipping-to-three-shadermaterial
             // 1.1.0 version changes: Because Aframe 1.1.0 changes text material shader to use webgl 2(glsl 3) some of the three.js ShaderChunk had to be converted to glsl 3.
-            const fragmentShader = `#version 300 es
+            const fragmentShader = `
             precision highp float;
             uniform bool negate;
             uniform float alphaTest;
@@ -61,7 +61,7 @@ export default class TextElement extends ContainerElement {
                 fragColor = vec4(color.xyz, alpha * opacity);
             }`;
 
-            const vertexShader = `#version 300 es
+            const vertexShader = `
             in vec2 uv;
             in vec3 position;
             uniform mat4 projectionMatrix;

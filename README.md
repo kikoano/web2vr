@@ -80,7 +80,7 @@ Install and use directly by including the [browser files](https://github.com/kik
 <html>
 
 <head>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/web2vr@1.1.1/dist/web2vr.min.js"></script>
     <style>
         #html-container{
@@ -152,7 +152,10 @@ This is the list of the available parameters.
 | **skybox** | true | Create default skybox if there is no skybox in the scene. |
 | **border**| true | Enable CSS border support. For now all borders width is 1 due to limitations of WebGL line width. |
 ## Compatibility
-For A-Frame 1.2.0 and newer versions use Web2VR 1.1.1 or newer version.
+
+For A-Frame 1.5.0/1.6.0 use Web2VR 1.2.1.
+
+For A-Frame 1.2.0/1.3.0/1.4.0 use Web2VR 1.1.1.
 
 For A-Frame 1.0.4 and older versions use Web2VR 1.0.1 version.
 

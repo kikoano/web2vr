@@ -3,7 +3,7 @@ import Deepmerge from "deepmerge";
 import "aframe";
 import "aframe-gif-shader";
 import "./plugins/aframe-keyboard.min";
-import "super-hands";
+// import "super-hands";
 import Settings from "./settings";
 import "./components/border";
 import "./components/animate";
